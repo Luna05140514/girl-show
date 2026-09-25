@@ -329,10 +329,10 @@ const NEW_HAIRS=[
    back:h=>`<g transform="translate(200 90) scale(1.22) translate(-200 -90)">`+HP(TAILHI,h,4.2)+HL('M232 76 C282 74 314 118 310 170',h)+HL('M250 96 C284 118 296 160 290 206',h)+HL('M300 190 C304 222 316 244 336 258',h,2.5)+`</g>`+HP(HB_SHORT,h),
    front:h=>HP(CAP,h)+HL('M132 164 Q168 118 200 96',h,2.5)+HL('M268 164 Q232 118 204 96',h,2.5)+HL('M200 146 L202 102',h,2.5)+HL('M112 190 Q140 130 196 98',h,2)
      +both(HP(WISP,h,4)+HL('M100 196 Q94 222 94 250',h,1.8))+HP('M194 147 Q178 160 170 182 Q186 172 200 150 Z',h,3.5)+HP('M214 148 Q226 160 230 176 Q220 166 208 152 Z',h,3.5)+scr(206,94,19,'#ff8fb5',h)},
-  {n:'大波浪捲',
+  {n:'瀏海大波浪',
    back:h=>HP(WAVY,h)+both(HL('M96 250 C84 290 104 320 92 352',h)+HL('M104 372 C96 394 110 412 122 422',h)+HL('M120 300 C112 330 126 360 118 392',h,2.5)),
-   front:h=>HP(HF_SWEEP,h)+HL('M160 150 Q134 170 118 210',h,2.5)+HL('M240 150 Q272 168 290 206',h,2.5)
-     +both(HP(LOCK,h,4)+HL('M98 250 C90 272 104 290 98 312',h,2)+HL('M100 340 Q98 356 110 362',h,2))+hclip(124,150,-35,'#ff8fb5',h)+hclip(110,176,-58,'#8fd3ff',h)},
+   front:h=>HP(HF_BANGS,h)+bangLines(h)+HL('M118 124 Q106 152 102 192',h,2.5)+HL('M282 124 Q294 152 298 192',h,2.5)
+     +both(HP(LOCK,h,4)+HL('M98 250 C90 272 104 290 98 312',h,2)+HL('M100 340 Q98 356 110 362',h,2))+hclip(266,138,28,'#ff8fb5',h)+hclip(284,160,55,'#8fd3ff',h)},
   {n:'側邊麻花辮',
    back:h=>HP(HB_SHORT,h),
    front:h=>{const pts=bez([298,250],[322,302],[268,360],[268,428],9);
@@ -371,6 +371,13 @@ const NEW_HAIRS=[
    front:h=>HP(PART_BACK,h)+both(HL('M150 146 Q180 124 196 114',h,2)+braid(bez([190,112],[146,112],[112,142],[100,202],9),10,8,h))},
 ];
 HAIRS.push(...NEW_HAIRS);
+const TT_HI='M126 102 C80 80 44 120 46 190 C48 260 30 320 44 372 C58 360 66 340 64 316 C74 344 84 356 96 350 C80 320 84 270 86 220 C88 170 100 130 132 118 Z';
+const TT_LO='M98 268 C70 290 74 340 86 380 C92 400 88 420 76 434 C102 434 118 410 116 380 C114 340 122 300 112 270 Z';
+HAIRS.push(
+  {n:'高雙馬尾',back:h=>both(HP(TT_HI,h)+HL('M100 110 C68 140 64 220 62 300',h)+HL('M112 130 C88 170 86 250 80 330',h,2.5)+HL('M56 330 Q52 350 58 364',h,2))+HP(HB_SHORT,h),
+   front:h=>HP(HF_BANGS,h)+bangLines(h)+both(HL('M118 152 Q122 124 128 110',h,2)+scr(126,106,16,'#ff8fb5',h))},
+  {n:'低雙馬尾',back:h=>HP('M92 215 C85 110 140 90 200 90 C260 90 315 110 308 215 L304 282 Q200 302 96 282 Z',h),
+   front:h=>HP(HF_PART,h)+partLines(h)+both(HP(TT_LO,h,4.5)+HL('M100 300 C90 330 96 370 92 410',h,2.2)+HL('M108 300 C104 340 108 380 100 420',h,1.8)+bowAt(104,276,.36,hcol(h,'#ff8fb5'),true,{}))});
 for(const n of ['俏短髮','雙側編髮','精靈短髮']){const i=HAIRS.findIndex(h=>h.n===n);if(i>=0)HAIRS.splice(i,1);}
 const shine='<path d="M140 120 Q165 102 192 100" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="7" stroke-linecap="round"/>';
 
@@ -700,7 +707,75 @@ const SHOES=[
   {n:'芭蕾舞鞋',d:(s)=>L('M170 492 L190 470 M190 492 L170 470 M172 470 L188 448 M188 470 L172 448',s.thumb?OL:s.dk,3)+FP('M167 494 L193 494 Q197 508 195 518 Q182 526 162 524 Q152 522 154 512 Q157 502 167 494 Z',s.f,s)+P('M178 496 L172 500 L178 504 Z M178 496 L184 500 L178 504 Z',s.thumb?'#fff':s.lt,2)},
   {n:'涼鞋',d:(s,sk)=>P('M168 486 L192 486 Q197 506 195 516 Q182 524 160 522 Q151 520 153 510 Q157 498 168 486 Z',s.thumb?'#fff':sk,4)+FP('M150 516 Q176 522 197 514 L198 522 Q182 530 156 528 Q146 526 150 516 Z',s.f,s,4)+FP('M166 492 L194 492 L194 499 L166 499 Z',s.f,s,3)+FP('M156 506 L196 504 L196 511 L154 513 Z',s.f,s,3)+C(175,508,5,tc('#fff4a8',s),2)},
 ];
-const SHOE_COLORS=['#ff7eb6','#a44de0','#6fb7ff','#ffc94d','#8b5a3c','#ffffff','#2f2f3a','#ff5d5d'];
+const SHOE_COLORS=['#ff7eb6','#ff8fb5','#ffb3d1','#ffc2d8','#a44de0','#d8b8ff','#6fb7ff','#bfe6ff','#ffc94d','#8b5a3c','#5a3322','#8e2340','#fff4e0','#ffffff','#2f2f3a','#ff5d5d'];
+/* ================= 10 款精緻鞋子 ================= */
+const HLt=(x,y,rx,ry,rot,s)=>s.thumb?'':`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="#fff" opacity=".65" transform="rotate(${rot} ${x} ${y})"/>`;
+const sock=(y0,s)=>P(`M169 ${y0} L191 ${y0} L192 494 L168 494 Z`,'#fff',4)+L(`M174 ${y0+4} L174 490 M180 ${y0+4} L180 490 M186 ${y0+4} L186 490`,s.thumb?'#ddd':'#e6dfee',1.4);
+const HEEL_FOOT='M170 486 L192 486 Q197 498 195 508 Q178 514 158 526 Q148 530 146 524 Q146 516 156 508 Q164 498 170 486 Z';
+const NEW_SHOES=[
+  {n:'厚底小皮鞋',def:'#5a3322',sp:false,d:s=>{const T=s.thumb;
+    return sock(466,s)+FP('M146 514 Q172 522 199 512 L199 528 Q178 538 152 534 Q142 530 146 514 Z',T?'#fff':'#2e1f18',nosp(s),4)
+      +L('M150 526 Q175 532 197 523',T?'#bbb':'#fff',1.3,'stroke-dasharray="3 3" opacity=".55"')
+      +FP('M166 486 L195 486 Q200 500 199 514 Q176 522 147 516 Q146 504 154 497 Q160 490 166 486 Z',s.f,s,4.5)
+      +FP('M164 492 L197 490 L197 499 L163 501 Z',s.b,s,3)
+      +`<rect x="185" y="489" width="9" height="11" rx="2" fill="none" stroke="${OL}" stroke-width="5"/><rect x="185" y="489" width="9" height="11" rx="2" fill="none" stroke="${T?'#fff':'url(#gBtn)'}" stroke-width="2.5"/>`
+      +HLt(158,506,6,2.6,-25,s)+HLt(188,508,4,1.8,-10,s);}},
+  {n:'水晶玻璃鞋',def:'#bfe6ff',sp:true,d:(s,sk)=>{const T=s.thumb,g=T?'#fff':'url(#gGlass)';
+    const vamp='M148 512 Q158 500 172 503 Q181 510 177 521 Q165 529 149 529 Q143 522 148 512 Z';
+    return P(HEEL_FOOT,T?'#fff':sk,4)
+      +`<path d="M187 506 L197 504 L194 531 L190 531 Z" fill="${g}" fill-opacity="${T?1:.85}" ${so(3)}/>`
+      +`<path d="M195 507 Q178 514 158 526 Q148 531 146 526 L146 531 Q150 535 160 531 Q180 521 197 513 Z" fill="${g}" ${so(3)}/>`
+      +`<path d="${vamp}" fill="${g}" fill-opacity="${T?1:.72}" ${so(3.5)}/>`+(s.sp&&!T?`<path d="${vamp}" fill="url(#glit)" class="glit"/>`:'')
+      +`<path d="M184 492 Q198 494 196 509 L184 512 Z" fill="${g}" fill-opacity="${T?1:.72}" ${so(3)}/>`
+      +(T?'':L('M152 514 Q160 506 170 507','#fff',2.2,'opacity=".95"')+L('M189 497 L190 506','#fff',1.8))
+      +`<path d="M160 502 L165.5 509 L160 516 L154.5 509 Z" fill="${T?'#fff':'url(#gGemBlue)'}" ${so(1.8)}/>`+(T?'':`<path d="M158 506 L160 503 L161 507 Z" fill="#fff"/>`+tw(169,499,4.5)+tw(150,505,3));}},
+  {n:'貓掌低跟鞋',def:'#ffb3d1',sp:false,d:s=>{const T=s.thumb;
+    const body='M168 486 L194 486 Q199 500 197 512 Q180 516 160 527 Q146 532 145 524 Q144 512 156 504 Q162 494 168 486 Z';
+    return FP('M185 513 L197 511 L197 530 L187 530 Z',s.b,s,3.5)+FP(body,s.f,s,4.5)+L('M197 512 Q180 516 160 527 Q148 532 145 526',T?OL:s.dk,3)
+      +`<g transform="translate(176,506)"><ellipse cx="0" cy="3" rx="5.5" ry="4.5" fill="${T?'#fff':'#fff0f6'}" ${so(1.5)}/>${[[-6,-3],[-2,-6.5],[3,-6.5],[7,-3]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="2.1" fill="${T?'#fff':'#ff8fbf'}" ${so(1.2)}/>`).join('')}</g>`
+      +FP('M168 489 L195 488 L195 495 L168 496 Z',s.b,s,2.5)+bowAt(172,492,.2,T?'#fff':'#fff0f6',false,{})+HLt(155,512,5,2.4,-30,s);}},
+  {n:'蕾絲瑪麗珍',def:'#ff8fb5',sp:false,d:s=>{const T=s.thumb;
+    return P('M169 466 L191 466 L192 494 L168 494 Z','#fff',4)
+      +P(`M163 461 L197 461 L197 469${sc(197,163,469,4,7)} Z`,'#fff',3)+(T?'':[167.5,176,184.5,193].map(x=>`<circle cx="${x}" cy="472" r="1.6" fill="#e8d3ee"/>`).join('')+L('M165 465 L195 465','#e8d3ee',1.4,'stroke-dasharray="3 2"'))
+      +FP(SOLE,s.f,s,4.5)+L('M150 517 Q175 524 197 516',T?OL:s.dk,3)
+      +FP('M165 495 L196 494 L196 502 L164 503 Z',s.b,s,3)+`<circle cx="189" cy="498" r="3.4" fill="url(#gPearl)" ${so(1.4)}/>`+HLt(158,508,6,2.6,-25,s);}},
+  {n:'珍珠公主鞋',def:'#ffffff',sp:false,d:s=>{const T=s.thumb;
+    const body='M165 488 L195 488 Q200 504 198 518 Q182 530 157 528 Q145 525 147 512 Q151 498 165 488 Z';
+    return FP(body,s.f,s,4.5)+L('M148 518 Q176 526 198 516',T?OL:s.dk,3)+FP('M163 495 L197 493 L197 501 L162 503 Z',s.b,s,3)
+      +[166,173,180,187,194].map(x=>`<circle cx="${x}" cy="${(498-(x-166)*.07).toFixed(1)}" r="3.3" fill="url(#gPearl)" ${so(1.3)}/>`).join('')
+      +`<path d="M152 511 Q156 503 164 501" fill="none" stroke="${T?OL:'#d9c4e6'}" stroke-width="1.5" stroke-dasharray="3 2.5"/>`+HLt(157,511,6,2.8,-25,s);}},
+  {n:'絲緞芭蕾鞋',def:'#ffc2d8',sp:false,d:s=>{const T=s.thumb,rb=T?'#fff':s.c;
+    const rib=d=>L(d,OL,6.5)+L(d,rb,3.5)+(T?'':L(d,'#fff',1,'opacity=".6"'));
+    return rib('M170 494 L191 471')+rib('M190 494 L170 474')+rib('M171 471 L190 452')+rib('M189 471 L171 454')
+      +FP('M167 492 L193 492 Q198 507 196 518 Q182 527 161 525 Q151 522 153 512 Q156 500 167 492 Z',s.f,s,4.5)
+      +L('M168 494 Q180 500 193 494',T?OL:s.dk,1.8)+L('M156 512 L160 506 M154 518 L158 514',T?OL:s.dk,1.4,'opacity=".6"')
+      +bowAt(180,451,.18,rb,true,{})+HLt(160,512,6,2.5,-20,s)+(T?'':L('M171 500 Q164 506 162 514','#fff',2,'opacity=".6"'));}},
+  {n:'草莓涼鞋',def:'#ffffff',sp:false,d:(s,sk)=>{const T=s.thumb;
+    const berry=(x,y)=>`<path d="M${x} ${y+6} Q${x-6} ${y} ${x-5} ${y-2} Q${x} ${y-4} ${x+5} ${y-2} Q${x+6} ${y} ${x} ${y+6} Z" fill="${T?'#fff':'#ff4f6e'}" ${so(1.4)}/><path d="M${x-4} ${y-2} L${x} ${y-5} L${x+4} ${y-2}" fill="${T?'#fff':'#6fbf5a'}" ${so(1.2)}/>`+(T?'':`<circle cx="${x-1.5}" cy="${y+1}" r=".7" fill="#fff"/><circle cx="${x+1.5}" cy="${y+2.5}" r=".7" fill="#fff"/>`);
+    return P('M168 484 L192 484 Q197 504 195 515 Q182 523 160 521 Q150 519 152 509 Q156 496 168 484 Z',T?'#fff':sk,4)+L('M155 512 L155 518 M160 514 L160 520',OL,1.4)
+      +FP('M149 515 Q176 522 197 513 L198 522 Q182 530 156 528 Q146 526 149 515 Z',s.f,s,4)
+      +FP('M185 470 L195 470 L195 494 L185 494 Z',s.f,s,3)+FP('M166 489 L195 489 L195 497 L166 497 Z',s.f,s,3)+FP('M160 503 L196 501 L196 509 L158 511 Z',s.f,s,3)
+      +berry(178,493)+berry(171,506)+berry(186,505)+berry(190,478);}},
+  {n:'愛心亮片跟鞋',def:'#d8b8ff',sp:true,d:s=>{const T=s.thumb;
+    const body='M168 492 L194 490 Q199 500 197 511 Q180 515 160 527 Q146 532 145 524 Q144 512 156 505 Q162 498 168 492 Z';
+    return FP('M183 512 L198 510 L197 531 L185 531 Z',s.b,s,3.5)+FP(body,s.f,s,4.5)+L('M197 511 Q180 515 160 527 Q148 532 145 526',T?OL:s.dk,3)
+      +FP('M168 477 L193 477 L193 485 L168 485 Z',s.b,s,3)+L('M181 485 L179 493',OL,5)+L('M181 485 L179 493',T?'#fff':s.c,2.5)
+      +`<path d="${heart(187,481,6)}" fill="${T?'#fff':'url(#gGemPink)'}" stroke="${T?OL:'#c98f1c'}" stroke-width="2.4"/>`+(T?'':`<path d="${heart(187,481,6)}" fill="none" stroke="${OL}" stroke-width=".8"/><circle cx="185" cy="478" r="1.4" fill="#fff"/>`)
+      +HLt(156,512,6,2.6,-30,s)+(T?'':tw(150,503,4)+tw(197,498,3));}},
+  {n:'兔耳娃娃鞋',def:'#fff4e0',sp:false,d:s=>{const T=s.thumb;
+    const ear=(cx,cy,rot)=>`<g transform="rotate(${rot} ${cx} ${cy})"><ellipse cx="${cx}" cy="${cy}" rx="5.5" ry="14" fill="#fff" ${so(2.6)}/><ellipse cx="${cx}" cy="${cy+1}" rx="2.4" ry="9" fill="${T?'#fff':'#ffc2d8'}"/>${T?'':`<ellipse cx="${cx-2}" cy="${cy-6}" rx="1.3" ry="4" fill="#fff" opacity=".9"/>`}</g>`;
+    return ear(187,472,-10)+ear(196,476,14)
+      +FP('M167 490 L194 490 Q199 506 197 519 Q182 528 158 526 Q147 523 150 512 Q154 500 167 490 Z',s.f,s,4.5)
+      +L('M168 494 Q181 500 194 494',T?OL:s.dk,1.8)+C(161,506,4.5,'#fff',2)+(T?'':`<circle cx="160" cy="504.5" r="1.5" fill="#fff" opacity=".9"/>`)+HLt(165,514,6,2.4,-15,s);}},
+  {n:'蝴蝶結樂福鞋',def:'#8e2340',sp:false,d:s=>{const T=s.thumb;
+    return sock(468,s)+FP('M145 514 Q172 522 199 512 L199 530 Q178 539 150 535 Q140 530 145 514 Z',T?'#fff':'#3a2a26',nosp(s),4)
+      +L('M147 523 Q172 530 198 521',T?'#bbb':'#fff',1.3,'stroke-dasharray="3 3" opacity=".6"')
+      +FP('M166 486 L195 486 Q200 500 199 514 Q176 522 146 516 Q145 504 153 497 Q160 490 166 486 Z',s.f,s,4.5)
+      +`<path d="M152 506 Q160 495 176 495 Q190 495 196 501" fill="none" stroke="${T?OL:s.lt}" stroke-width="1.6" stroke-dasharray="3 2.5"/>`
+      +FP('M160 499 L190 497 L190 504 L159 506 Z',s.b,s,2.5)+bowAt(172,494,.34,T?'#fff':'#ff9ec7',false,{})+HLt(156,509,6,2.6,-25,s);}},
+];
+SHOES.push(...NEW_SHOES);
+
 
 /* ================= 配件（back 畫在頭後、front 畫在最上層） ================= */
 const ACCS=[
@@ -815,6 +890,7 @@ const NEW_ACCS=[
 ];
 ACCS.push(...NEW_ACCS);
 function accDefs(){return `
+<linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f2fbff"/><stop offset=".5" stop-color="#bfe6ff"/><stop offset="1" stop-color="#ffcfe8"/></linearGradient>
 <linearGradient id="gEarPink" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff8fbf"/><stop offset="1" stop-color="#ffe3ee"/></linearGradient>
 <linearGradient id="gGemPink" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffd0e6"/><stop offset=".5" stop-color="#ff6fae"/><stop offset="1" stop-color="#d62f7a"/></linearGradient>
 <linearGradient id="gGemBlue" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e0f7ff"/><stop offset=".5" stop-color="#6cc6ff"/><stop offset="1" stop-color="#2f7fd6"/></linearGradient>
@@ -1017,40 +1093,55 @@ function sStage(){
   return s;
 }
 /* 6 繽紛糖果屋樂園 */
+function lolli(x,y,R,cols,stickTo){
+  let s=L(`M${x} ${y+R-4} L${x} ${stickTo}`,OL,11)+L(`M${x} ${y+R-4} L${x} ${stickTo}`,'#fff',6)+`<circle cx="${x}" cy="${y}" r="${R}" fill="${cols[0]}" ${so(4.5)}/>`;
+  for(let k=1;k<cols.length;k++){let d='';const off=k/cols.length*Math.PI*2;
+    for(let i=0;i<=90;i++){const t=i/90,a=off+t*5*Math.PI,rr=R*.9*t;d+=(i?'L':'M')+(x+rr*Math.cos(a)).toFixed(1)+' '+(y+rr*Math.sin(a)).toFixed(1);}
+    s+=`<path d="${d}" fill="none" stroke="${cols[k]}" stroke-width="${(R*.2).toFixed(1)}" stroke-linecap="round"/>`;}
+  return s+`<circle cx="${x}" cy="${y}" r="${R}" fill="url(#shRound)" opacity=".5"/><circle cx="${x}" cy="${y}" r="${R}" fill="none" ${so(4.5)}/><ellipse cx="${x-R*.4}" cy="${y-R*.45}" rx="${R*.28}" ry="${R*.13}" fill="#fff" opacity=".85" transform="rotate(-35 ${x-R*.4} ${y-R*.45})"/>`
+    +bowAt(x,y+R+8,R/130,'#9ee0ff',true,{});
+}
+const wcandy=(x,y,rot,c,c2='#fff')=>`<g transform="translate(${x},${y}) rotate(${rot})"><path d="M-13 0 L-28 -12 L-25 0 L-28 12 Z M13 0 L28 -12 L25 0 L28 12 Z" fill="${c}" ${so(2.5)}/><ellipse rx="16" ry="12" fill="${c}" ${so(3)}/><path d="M-6 -11 Q-10 0 -6 11 M4 -12 Q0 0 4 12" stroke="${c2}" stroke-width="3.2" fill="none" opacity=".85"/><ellipse cx="-7" cy="-5" rx="4" ry="2" fill="#fff" opacity=".75"/></g>`;
 function sCandy(){
-  const r=rng(31);
-  let s=`<defs>${LG('b6sky',['#ffd6ec','#d8f6f0'])}${RG('b6glow','#fff3f9',.9)}
-    <pattern id="b6chk" width="60" height="60" patternUnits="userSpaceOnUse"><rect width="60" height="60" fill="#fff"/><rect width="30" height="30" fill="#ffc2dc"/><rect x="30" y="30" width="30" height="30" fill="#ffc2dc"/></pattern>
-    <pattern id="b6stripe" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(40)"><rect width="16" height="16" fill="#fff"/><rect width="8" height="16" fill="#ff6fa8"/></pattern>
-    ${LG('b6choc',['#9a5f3a','#6a3a1f'])}</defs>`;
+  const r=rng(31);let spr='';
+  for(let i=0;i<10;i++)spr+=`<rect x="${(r()*36).toFixed(0)}" y="${(r()*36).toFixed(0)}" width="7" height="2.6" rx="1.3" fill="${['#ff6fa8','#6fc3ff','#ffd24a','#8fe3a0','#c79bff'][i%5]}" transform="rotate(${(r()*180).toFixed(0)} 20 20)"/>`;
+  let s=`<defs>${LG('b6sky',['#ffd6ec','#e3f7f2'])}${LG('b6cream',['#ffffff','#ffe6f1'])}${LG('b6pink',['#ffd0e4','#ff9ec7'])}${LG('b6lemon',['#fff6d2','#ffe08a'])}${LG('b6lilac',['#ece2ff','#c9b3ff'])}${LG('b6mint',['#dffaf0','#9fe6cb'])}
+    <pattern id="b6spr" width="40" height="40" patternUnits="userSpaceOnUse"><rect width="40" height="40" fill="#ffd6e8"/>${spr}</pattern>${RG('b6glow','#fff6fb',.9)}</defs>`;
   s+=BGR('url(#b6sky)');
+  s+=`<g fill="none" stroke-width="20" opacity=".5" stroke-linecap="round"><path d="M90 420 A260 260 0 0 1 610 420" stroke="#ffb3c7"/><path d="M110 420 A240 240 0 0 1 590 420" stroke="#ffe2a0"/><path d="M130 420 A220 220 0 0 1 570 420" stroke="#c9f0b8"/><path d="M150 420 A200 200 0 0 1 550 420" stroke="#bfe3ff"/></g>`;
   const cc=(x,y,s1,f)=>`<g transform="translate(${x},${y}) scale(${s1})">${blossom([[0,0,26],[28,6,22],[-28,6,22],[14,-16,20],[-12,-14,18]],f,'#fff','#e8a6c8')}</g>`;
-  s+=cc(130,90,1.2,'#ffd1ea')+cc(560,70,1,'#cdeeff')+cc(360,150,.7,'#fff0b3');
-  // 餅乾牆
-  const cols=['#ffd9ae','#ffc2dc','#cdeeff','#fff1a8','#dcd0ff','#c9f2d8'];let w='';
-  for(let row=0;row<4;row++)for(let i=-2;i<12;i++){const x=i*70+(row%2?35:0),y=390+row*56,c=cols[(i+row*2+12)%6];
-    w+=`<rect x="${x+3}" y="${y+3}" width="64" height="50" rx="12" fill="${c}" ${so(3)}/><circle cx="${x+22}" cy="${y+20}" r="2.2" fill="#c98f6a"/><circle cx="${x+46}" cy="${y+32}" r="2.2" fill="#c98f6a"/><path d="M${x+30} ${y+14} l6 3 M${x+16} ${y+38} l5 -3 M${x+50} ${y+16} l-4 4" stroke="${['#ff6fa8','#6fc3ff','#ffd24a','#8fe3a0'][(i+row+8)%4]}" stroke-width="3" stroke-linecap="round"/>`;}
-  s+=`<rect x="-1000" y="390" width="2700" height="220" fill="#f7c9a1"/>`+w;
-  let drip=`M-60 382 L760 382 L760 396`;for(let x=760;x>-60;x-=40){drip+=` Q${x-10} 396 ${x-12} ${404+(x%80?10:22)} Q${x-20} ${418+(x%80?4:14)} ${x-28} 404 Q${x-30} 396 ${x-40} 396`;}
-  s+=`<path d="${drip} L-60 382 Z" fill="#fff" ${so(3.5)}/>`;
-  s+=FLR(600,'url(#b6chk)','#ff9ec7');
-  // 棒棒糖路燈
-  const lamp=x=>`<circle cx="${x}" cy="210" r="80" fill="url(#b6glow)"/><rect x="${x-8}" y="250" width="16" height="400" fill="url(#b6stripe)" ${so(4)}/>`
-    +`<circle cx="${x}" cy="210" r="50" fill="#fff" ${so(5)}/><path d="M${x} 210 m0 -4 a4 4 0 1 1 -4 4 a10 10 0 1 1 10 10 a18 18 0 1 1 -18 -18 a26 26 0 1 1 26 26 a34 34 0 1 1 -34 -34" fill="none" stroke="#ff6fa8" stroke-width="7" stroke-linecap="round"/>`
-    +`<ellipse cx="${x-18}" cy="190" rx="12" ry="6" fill="#fff" opacity=".7" transform="rotate(-30 ${x-18} 190)"/>`+bowAt(x,262,.45,'#9ee0ff',true,{});
-  s+=lamp(50)+lamp(650);
-  // 巧克力噴泉
-  s+=`<g transform="translate(152,0)"><path d="M-46 640 Q0 666 46 640 L40 620 L-40 620 Z" fill="#ffc2dc" ${so(4)}/><rect x="-5" y="540" width="10" height="84" fill="#f4c34a" ${so(3)}/>`
-    +`<path d="M-34 586 Q0 604 34 586 L28 572 L-28 572 Z" fill="#ffc2dc" ${so(3.5)}/><path d="M-20 540 Q0 552 20 540 L16 530 L-16 530 Z" fill="#ffc2dc" ${so(3)}/>`
-    +`<path d="M-16 530 Q-20 500 0 494 Q20 500 16 530 Z M-28 572 Q-40 560 -18 548 L18 548 Q40 560 28 572 Z M-40 620 Q-52 604 -32 592 L32 592 Q52 604 40 620 Z" fill="url(#b6choc)" ${so(3)}/>`
-    +[-30,-12,10,28].map(dx=>`<path d="M${dx} 596 q2 12 0 20 q-3 4 -5 0 q-1 -10 1 -20 Z" fill="#7a4526"/>`).join('')
-    +[[-24,612],[22,612]].map(([x,y])=>`<path d="${heart(x,y,6)}" fill="#ff4f6e" ${so(2)}/>`).join('')+`</g>`;
-  // 軟糖 + 棉花糖 + 拐杖糖
-  [[250,690,'#ff8fb5'],[470,700,'#8fe3c4'],[560,660,'#ffd24a'],[40,690,'#c9b8ff']].forEach(([x,y,c])=>s+=`<path d="M${x-14} ${y} Q${x-14} ${y-26} ${x} ${y-26} Q${x+14} ${y-26} ${x+14} ${y} Z" fill="${c}" ${so(3)}/><ellipse cx="${x-5}" cy="${y-18}" rx="4" ry="2" fill="#fff" opacity=".7"/>`);
-  s+=L('M600 700 L600 610 Q600 588 620 588 Q640 588 640 606',OL,14)+L('M600 700 L600 610 Q600 588 620 588 Q640 588 640 606','#fff',8)+L('M600 700 L600 610 Q600 588 620 588 Q640 588 640 606','#ff4f6e',8,'stroke-dasharray="7 7"');
-  for(let i=0;i<16;i++)s+=`<rect x="${(r()*700).toFixed(0)}" y="${(r()*360).toFixed(0)}" width="10" height="4" rx="2" fill="${['#ff6fa8','#6fc3ff','#ffd24a','#8fe3a0'][i%4]}" transform="rotate(${(r()*180).toFixed(0)} ${(r()*700).toFixed(0)} ${(r()*360).toFixed(0)})" opacity=".8"/>`;
+  s+=cc(110,70,1.1,'#ffd1ea')+cc(600,60,1,'#cdeeff')+cc(350,40,.65,'#fff0b3');
+  s+=`<path d="M-1000 470 L-20 470 Q40 420 100 460 Q160 410 230 455 Q300 415 360 452 Q430 410 500 455 Q570 415 640 458 Q700 425 760 460 L1700 460 L1700 620 L-1000 620 Z" fill="url(#b6cream)" ${so(4)}/>`;
+  for(let i=0;i<30;i++)s+=`<rect x="${(r()*720-10).toFixed(0)}" y="${(470+r()*120).toFixed(0)}" width="8" height="3" rx="1.5" fill="${['#ff6fa8','#6fc3ff','#ffd24a','#8fe3a0','#c79bff'][i%5]}" transform="rotate(${(r()*180).toFixed(0)} ${(r()*700).toFixed(0)} 520)"/>`;
+  s+=lolli(232,112,40,['#ff8fb5','#fff','#ffd0e4'],600)+lolli(470,96,46,['#9ee0ff','#fff','#c9b3ff'],600)+lolli(346,40,22,['#fff08a','#ff8fb5','#fff'],150);
+  s+=FLR(600,'url(#b6spr)');
+  s+=`<path d="M-1000 596 L1700 596 L1700 604${sc(1700,-1000,604,90,12)} Z" fill="#fff" ${so(3)}/>`;
+  // 三層蛋糕
+  const tier=(x1,x2,y1,y2,f)=>`<rect x="${x1}" y="${y1}" width="${x2-x1}" height="${y2-y1}" rx="10" fill="${f}" ${so(4)}/><rect x="${x1}" y="${y1}" width="${x2-x1}" height="${y2-y1}" rx="10" fill="url(#shRound)" opacity=".45"/>`
+    +`<path d="M${x1} ${y1+4} Q${x1} ${y1-5} ${x1+9} ${y1-5} L${x2-9} ${y1-5} Q${x2} ${y1-5} ${x2} ${y1+4} L${x2} ${y1+10}${sc(x2,x1,y1+10,Math.round((x2-x1)/16),11)} Z" fill="#fff" ${so(3)}/>`
+    +[...Array(Math.floor((x2-x1-16)/12)+1)].map((_,i)=>`<circle cx="${x1+8+i*12}" cy="${y2-6}" r="3.4" fill="url(#gPearl)" ${so(1.2)}/>`).join('');
+  s+=`<ellipse cx="100" cy="644" rx="98" ry="12" fill="#fff" ${so(4)}/>`+tier(18,182,562,640,'url(#b6pink)')+tier(38,162,494,562,'url(#b6lemon)')+tier(60,140,432,494,'url(#b6lilac)');
+  s+=[[62,590],[100,596],[138,590]].map(([x,y])=>`<path d="${heart(x,y,7)}" fill="#fff" opacity=".85"/>`).join('')+[[64,528],[100,530],[136,528]].map(([x,y])=>flw(x,y,4,'#ff9ec7','#fff',1.3)).join('');
+  [[80,398,'#ff9ec7'],[100,392,'#9ee0ff'],[120,398,'#fff08a']].forEach(([x,y,c])=>s+=`<circle cx="${x}" cy="${y-6}" r="12" fill="url(#b6glow)"/><rect x="${x-3.5}" y="${y}" width="7" height="30" rx="2" fill="${c}" ${so(2.5)}/><path d="M${x} ${y-14} Q${x+5} ${y-7} ${x} ${y-2} Q${x-5} ${y-7} ${x} ${y-14} Z" fill="#ffd24a" ${so(1.6)}/>`);
+  s+=[[74,428],[126,428]].map(([x,y])=>`<path d="${heart(x,y,7)}" fill="#ff4f6e" transform="rotate(180 ${x} ${y})" ${so(2)}/><path d="M${x-4} ${y-6} L${x} ${y-10} L${x+4} ${y-6}" fill="#6fbf5a" ${so(1.4)}/>`).join('');
+  // 大杯子蛋糕
+  s+=`<path d="M572 566 L668 566 L658 642 L582 642 Z" fill="url(#b6mint)" ${so(4)}/>`+[586,600,614,628,642,656].map(x=>L(`M${x} 570 L${x+(x-620)*-.1} 640`,'#fff',3,'opacity=".7"')).join('');
+  [[620,562,58,19],[620,542,46,17],[620,524,32,14]].forEach(([x,y,rx,ry])=>s+=`<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="url(#b6pink)" ${so(4)}/><ellipse cx="${x-rx*.35}" cy="${y-ry*.35}" rx="${rx*.3}" ry="${ry*.25}" fill="#fff" opacity=".6"/>`);
+  s+=`<path d="M620 494 Q610 506 606 512 L634 512 Q630 506 620 494 Z" fill="url(#b6pink)" ${so(3.5)}/>`+L('M620 482 Q626 470 634 466',OL,3)+`<circle cx="620" cy="486" r="11" fill="#ff3b5c" ${so(3)}/><ellipse cx="616" cy="482" rx="3.5" ry="2" fill="#fff" opacity=".85"/>`;
+  for(let i=0;i<14;i++)s+=`<rect x="${(578+r()*84).toFixed(0)}" y="${(522+r()*44).toFixed(0)}" width="7" height="2.6" rx="1.3" fill="${['#6fc3ff','#ffd24a','#8fe3a0','#c79bff'][i%4]}" transform="rotate(${(r()*180).toFixed(0)} 620 540)"/>`;
+  // 拐杖糖
+  const cane=(x,flip)=>{const d=`M${x} 650 L${x} 560 Q${x} 538 ${x+20*flip} 538 Q${x+40*flip} 538 ${x+40*flip} 556`;return L(d,OL,14)+L(d,'#fff',8)+L(d,'#ff4f6e',8,'stroke-dasharray="7 7"');};
+  s+=cane(530,1)+cane(682,-1);
+  // 漂浮糖果 + 地上點心
+  s+=wcandy(190,210,-20,'#ffb3d9')+wcandy(560,250,15,'#9ee0ff')+wcandy(170,330,10,'#fff08a','#ff8fb5')+wcandy(590,370,-12,'#c9b3ff');
+  s+=`<g transform="translate(252,694)"><ellipse rx="32" ry="18" fill="#e8b37a" ${so(3.5)}/><path d="M-27 -2 Q-26 -14 0 -15 Q26 -14 27 -2 Q20 4 12 1 Q4 8 -6 2 Q-16 7 -27 -2 Z" fill="#ff9ec7" ${so(2.5)}/><ellipse cx="0" cy="-3" rx="8" ry="4" fill="#ffd6e8" ${so(2.5)}/>${[[-16,-8,'#6fc3ff'],[14,-9,'#ffd24a'],[-8,-12,'#8fe3a0'],[18,-3,'#fff']].map(([x,y,c])=>`<rect x="${x}" y="${y}" width="6" height="2.4" rx="1.2" fill="${c}" transform="rotate(${x*3} ${x} ${y})"/>`).join('')}</g>`;
+  s+=`<g transform="translate(470,700)">${[['#c9b3ff',0],['#9fe6cb',-18],['#ffb3d1',-36]].map(([c,y])=>`<ellipse cx="0" cy="${y}" rx="22" ry="8" fill="${c}" ${so(2.5)}/><rect x="-19" y="${y-11}" width="38" height="5" rx="2.5" fill="#fff" ${so(1.8)}/><ellipse cx="0" cy="${y-14}" rx="22" ry="8" fill="${c}" ${so(2.5)}/><ellipse cx="-8" cy="${y-17}" rx="6" ry="2" fill="#fff" opacity=".6"/>`).join('')}</g>`;
+  [[360,708,'#ff8fb5'],[40,690,'#8fe3c4'],[680,700,'#ffd24a'],[150,700,'#c9b3ff']].forEach(([x,y,c])=>s+=`<path d="M${x-13} ${y} Q${x-13} ${y-24} ${x} ${y-24} Q${x+13} ${y-24} ${x+13} ${y} Z" fill="${c}" ${so(3)}/><ellipse cx="${x-5}" cy="${y-17}" rx="4" ry="2" fill="#fff" opacity=".75"/>`);
+  s+=wcandy(410,712,-8,'#ffe08a','#ff6fa8')+lolli(38,420,22,['#fff08a','#ff8fb5','#fff'],600)+lolli(676,440,20,['#c9b3ff','#fff'],600);
+  for(let i=0;i<12;i++)s+=tw(r()*700,r()*420,3+r()*4,'#fff',.95);
   return s;
 }
+
 /* 7 櫻花漫舞日式庭園 */
 function sSakura(){
   const r=rng(47);
@@ -1164,6 +1255,7 @@ SCENES.push(
   {n:'公主臥室',bg:'#ffdfec',d:sBedroom},{n:'時尚攝影棚',bg:'#fff3cc',d:sStudio},{n:'魔法森林',bg:'#e3f7e6',d:sForest},
   {n:'下午茶花園',bg:'#e6f5ef',d:sTea},{n:'星空舞台',bg:'#2d2a74',d:sStage},{n:'糖果樂園',bg:'#fde2ef',d:sCandy},
   {n:'櫻花庭園',bg:'#ffeef4',d:sSakura},{n:'城堡大廳',bg:'#f9e6c4',d:sCastle},{n:'蔚藍海灘',bg:'#bfe8ff',d:sBeach},{n:'文青咖啡廳',bg:'#f6e6d2',d:sCafe});
+{const i=SCENES.findIndex(x=>x.n==='攝影棚');if(i>=0)SCENES.splice(i,1);}
 
 
 /* ================= 分頁定義 ================= */
@@ -1284,7 +1376,7 @@ $('#grid').addEventListener('click',e=>{
   if(selIndex(T.key)===i){boing();pop();return;}
   push();
   if(T.key==='skin')st.skin=i;else if(T.key==='bg')st.bg=i;else st[T.key].s=i;
-  if(T.key==='acc'&&ACCS[i].def)st.acc.c=ACCS[i].def;
+  if((T.key==='acc'||T.key==='shoes')&&T.items[i].def){st[T.key].c=T.items[i].def;if(T.items[i].sp!==undefined)st[T.key].sp=T.items[i].sp;}
   if(T.key==='skin'||T.key==='eyes'){render();renderPanel();pop();boing();burst(T.key);}else changed(T.key);
 });
 $('#palette').addEventListener('click',e=>{
