@@ -45,9 +45,9 @@
   .rbtn:active{transform:scale(.9)}
   .rbtn svg{width:56%;height:56%}
   #bHome{top:22px;left:22px}
-  #bUndo{top:22px;left:calc(22px + var(--bs)*1.3)}
-  #bDice{top:22px;left:calc(22px + var(--bs)*2.6)}
-  #bSound{top:22px;left:calc(22px + var(--bs)*3.9)}
+  #bUndo{top:22px;left:calc(22px + var(--bs)*1.55)}
+  #bDice{top:22px;left:calc(22px + var(--bs)*3.1)}
+  #bSound{top:22px;left:calc(22px + var(--bs)*4.65)}
   #nextWrap{position:absolute;top:8px;right:24px;display:flex;flex-direction:column;align-items:center;gap:8px;z-index:3}
   #dots{display:flex;gap:5px}
   #dots i{width:10px;height:10px;border-radius:50%;background:#e9dc9b;transition:background .3s}
@@ -126,6 +126,56 @@
     padding:12px 26px;border-radius:999px;box-shadow:0 8px 20px rgba(120,60,140,.25);opacity:0;pointer-events:none;z-index:20}
   #toast.show{animation:toast 2.2s ease}
   @keyframes toast{0%{opacity:0;transform:translate(-50%,20px)}12%,80%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,0)}}
+
+  /* ================= 夢幻手繪風 UI ================= */
+  html,body{background:#ffeede;font-family:"Arial Rounded MT Bold","PingFang TC","Microsoft JhengHei","Noto Sans TC",system-ui,sans-serif}
+  #stageWrap::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+    background:
+      radial-gradient(circle at 12% 18%,rgba(255,255,255,.9) 0 2px,transparent 3px),
+      radial-gradient(circle at 28% 62%,rgba(255,255,255,.8) 0 3px,transparent 4px),
+      radial-gradient(circle at 74% 24%,rgba(255,255,255,.9) 0 2px,transparent 3px),
+      radial-gradient(circle at 86% 58%,rgba(255,255,255,.85) 0 3px,transparent 4px),
+      radial-gradient(circle at 58% 12%,rgba(255,255,255,.7) 0 1.5px,transparent 2.5px),
+      radial-gradient(circle at 40% 84%,rgba(255,255,255,.75) 0 2px,transparent 3px),
+      radial-gradient(circle at 6% 74%,rgba(255,255,255,.7) 0 6px,transparent 12px),
+      radial-gradient(circle at 92% 86%,rgba(255,255,255,.6) 0 8px,transparent 16px),
+      radial-gradient(ellipse at 50% 45%,rgba(255,250,235,.35),transparent 65%);
+    animation:twinkle 3s ease-in-out infinite alternate}
+  @keyframes twinkle{from{opacity:.55}to{opacity:1}}
+  .rbtn{background:radial-gradient(circle at 34% 26%,#f2fbff 0,#b8e2ff 28%,#6cb6f2 68%,#4d93dd 100%);
+    border:3px solid #fff;box-shadow:inset 0 -5px 8px rgba(40,90,170,.35),inset 0 5px 6px rgba(255,255,255,.7),0 6px 12px rgba(80,120,190,.3)}
+  .rbtn::before{content:"";position:absolute;inset:calc(var(--bs) * -0.24);background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 120 120%22%3E%3Cellipse cx=%2275.1%22 cy=%22106.6%22 rx=%228%22 ry=%223.8%22 fill=%22%2368b85c%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(132.0 75.1 106.6)%22/%3E%3Cellipse cx=%2281.2%22 cy=%22109.6%22 rx=%226.5%22 ry=%223%22 fill=%22%23a9e394%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(187.0 81.2 109.6)%22/%3E%3Cellipse cx=%2288.1%22 cy=%22100.1%22 rx=%228%22 ry=%223.8%22 fill=%22%238fd67a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(115.0 88.1 100.1)%22/%3E%3Cellipse cx=%2294.8%22 cy=%22101.3%22 rx=%226.5%22 ry=%223%22 fill=%22%23a9e394%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(170.0 94.8 101.3)%22/%3E%3Cellipse cx=%2298.6%22 cy=%2290.2%22 rx=%228%22 ry=%223.8%22 fill=%22%2368b85c%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(98.0 98.6 90.2)%22/%3E%3Cellipse cx=%22105.4%22 cy=%2289.3%22 rx=%226.5%22 ry=%223%22 fill=%22%23a9e394%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(153.0 105.4 89.3)%22/%3E%3Cellipse cx=%22105.7%22 cy=%2277.6%22 rx=%228%22 ry=%223.8%22 fill=%22%238fd67a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(81.0 105.7 77.6)%22/%3E%3Cellipse cx=%22111.9%22 cy=%2274.7%22 rx=%226.5%22 ry=%223%22 fill=%22%23a9e394%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(136.0 111.9 74.7)%22/%3E%3Cellipse cx=%22108.9%22 cy=%2263.4%22 rx=%228%22 ry=%223.8%22 fill=%22%2368b85c%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(64.0 108.9 63.4)%22/%3E%3Cellipse cx=%22114.0%22 cy=%2258.9%22 rx=%226.5%22 ry=%223%22 fill=%22%23a9e394%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(119.0 114.0 58.9)%22/%3E%3Cellipse cx=%22107.7%22 cy=%2249.0%22 rx=%228%22 ry=%223.8%22 fill=%22%238fd67a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(47.0 107.7 49.0)%22/%3E%3Cellipse cx=%22111.3%22 cy=%2243.2%22 rx=%226.5%22 ry=%223%22 fill=%22%23a9e394%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(102.0 111.3 43.2)%22/%3E%3Cellipse cx=%22102.4%22 cy=%2235.5%22 rx=%228%22 ry=%223.8%22 fill=%22%2368b85c%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(30.0 102.4 35.5)%22/%3E%3Cellipse cx=%22104.1%22 cy=%2228.9%22 rx=%226.5%22 ry=%223%22 fill=%22%23a9e394%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(85.0 104.1 28.9)%22/%3E%3Cellipse cx=%2293.4%22 cy=%2224.2%22 rx=%228%22 ry=%223.8%22 fill=%22%238fd67a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(13.0 93.4 24.2)%22/%3E%3Cellipse cx=%2293.1%22 cy=%2217.4%22 rx=%226.5%22 ry=%223%22 fill=%22%23a9e394%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(68.0 93.1 17.4)%22/%3E%3Cellipse cx=%2244.9%22 cy=%22106.6%22 rx=%228%22 ry=%223.8%22 fill=%22%2368b85c%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(228.0 44.9 106.6)%22/%3E%3Cellipse cx=%2238.8%22 cy=%22109.6%22 rx=%226.5%22 ry=%223%22 fill=%22%23a9e394%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(173.0 38.8 109.6)%22/%3E%3Cellipse cx=%2231.9%22 cy=%22100.1%22 rx=%228%22 ry=%223.8%22 fill=%22%238fd67a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(245.0 31.9 100.1)%22/%3E%3Cellipse cx=%2225.2%22 cy=%22101.3%22 rx=%226.5%22 ry=%223%22 fill=%22%23a9e394%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(190.0 25.2 101.3)%22/%3E%3Cellipse cx=%2221.4%22 cy=%2290.2%22 rx=%228%22 ry=%223.8%22 fill=%22%2368b85c%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(262.0 21.4 90.2)%22/%3E%3Cellipse cx=%2214.6%22 cy=%2289.3%22 rx=%226.5%22 ry=%223%22 fill=%22%23a9e394%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(207.0 14.6 89.3)%22/%3E%3Cellipse cx=%2214.3%22 cy=%2277.6%22 rx=%228%22 ry=%223.8%22 fill=%22%238fd67a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(279.0 14.3 77.6)%22/%3E%3Cellipse cx=%228.1%22 cy=%2274.7%22 rx=%226.5%22 ry=%223%22 fill=%22%23a9e394%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(224.0 8.1 74.7)%22/%3E%3Cellipse cx=%2211.1%22 cy=%2263.4%22 rx=%228%22 ry=%223.8%22 fill=%22%2368b85c%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(296.0 11.1 63.4)%22/%3E%3Cellipse cx=%226.0%22 cy=%2258.9%22 rx=%226.5%22 ry=%223%22 fill=%22%23a9e394%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(241.0 6.0 58.9)%22/%3E%3Cellipse cx=%2212.3%22 cy=%2249.0%22 rx=%228%22 ry=%223.8%22 fill=%22%238fd67a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(313.0 12.3 49.0)%22/%3E%3Cellipse cx=%228.7%22 cy=%2243.2%22 rx=%226.5%22 ry=%223%22 fill=%22%23a9e394%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(258.0 8.7 43.2)%22/%3E%3Cellipse cx=%2217.6%22 cy=%2235.5%22 rx=%228%22 ry=%223.8%22 fill=%22%2368b85c%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(330.0 17.6 35.5)%22/%3E%3Cellipse cx=%2215.9%22 cy=%2228.9%22 rx=%226.5%22 ry=%223%22 fill=%22%23a9e394%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(275.0 15.9 28.9)%22/%3E%3Cellipse cx=%2226.6%22 cy=%2224.2%22 rx=%228%22 ry=%223.8%22 fill=%22%238fd67a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(347.0 26.6 24.2)%22/%3E%3Cellipse cx=%2226.9%22 cy=%2217.4%22 rx=%226.5%22 ry=%223%22 fill=%22%23a9e394%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(292.0 26.9 17.4)%22/%3E%3Cpath d=%22M22 92 Q60 118 98 92%22 fill=%22none%22 stroke=%22%234f9a4a%22 stroke-width=%221.6%22/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none}
+  .rbtn svg{filter:drop-shadow(0 2px 1px rgba(40,80,150,.35));position:relative}
+  #bNext{background:radial-gradient(circle at 34% 26%,#eaffdf 0,#9ae47e 30%,#4fbf55 70%,#2f9a44 100%);
+    box-shadow:inset 0 -6px 9px rgba(20,100,40,.35),inset 0 6px 7px rgba(255,255,255,.7),0 6px 12px rgba(40,130,60,.3)}
+  #bCam{background:linear-gradient(160deg,#fffdf6,#fff3e2);border:4px solid #cdbaf2;border-radius:26px;
+    box-shadow:0 0 0 3px #fff,0 8px 16px rgba(130,100,190,.3)}
+  #bCam::before{background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 220 90%22%3E%3Cpath d=%22M4 80 Q60 40 110 62 Q160 84 216 30%22 fill=%22none%22 stroke=%22%235fa85a%22 stroke-width=%222.4%22 stroke-linecap=%22round%22/%3E%3Cellipse cx=%2230.0%22 cy=%2264.0%22 rx=%229%22 ry=%224%22 fill=%22%237cc86a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(-40.0 30.0 64.0)%22/%3E%3Cellipse cx=%2252.0%22 cy=%2252.0%22 rx=%229%22 ry=%224%22 fill=%22%237cc86a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(20.0 52.0 52.0)%22/%3E%3Cellipse cx=%2280.0%22 cy=%2252.0%22 rx=%229%22 ry=%224%22 fill=%22%237cc86a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(-20.0 80.0 52.0)%22/%3E%3Cellipse cx=%22128.0%22 cy=%2270.0%22 rx=%229%22 ry=%224%22 fill=%22%237cc86a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(30.0 128.0 70.0)%22/%3E%3Cellipse cx=%22150.0%22 cy=%2274.0%22 rx=%229%22 ry=%224%22 fill=%22%237cc86a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(-30.0 150.0 74.0)%22/%3E%3Cellipse cx=%22178.0%22 cy=%2258.0%22 rx=%229%22 ry=%224%22 fill=%22%237cc86a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(20.0 178.0 58.0)%22/%3E%3Cellipse cx=%22200.0%22 cy=%2240.0%22 rx=%229%22 ry=%224%22 fill=%22%237cc86a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(-40.0 200.0 40.0)%22/%3E%3Ccircle cx=%2264.0%22 cy=%2241.5%22 r=%226%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2270.2%22 cy=%2246.0%22 r=%226%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2267.8%22 cy=%2253.3%22 r=%226%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2260.2%22 cy=%2253.3%22 r=%226%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2257.8%22 cy=%2246.0%22 r=%226%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2264%22 cy=%2248%22 r=%223.8%22 fill=%22%23ffe27a%22 stroke=%22%23e9a93a%22 stroke-width=%221%22/%3E%3Ccircle cx=%22140.0%22 cy=%2265.5%22 r=%226%22 fill=%22%23d9c2ff%22 stroke=%22%23b493ee%22 stroke-width=%221%22/%3E%3Ccircle cx=%22146.2%22 cy=%2270.0%22 r=%226%22 fill=%22%23d9c2ff%22 stroke=%22%23b493ee%22 stroke-width=%221%22/%3E%3Ccircle cx=%22143.8%22 cy=%2277.3%22 r=%226%22 fill=%22%23d9c2ff%22 stroke=%22%23b493ee%22 stroke-width=%221%22/%3E%3Ccircle cx=%22136.2%22 cy=%2277.3%22 r=%226%22 fill=%22%23d9c2ff%22 stroke=%22%23b493ee%22 stroke-width=%221%22/%3E%3Ccircle cx=%22133.8%22 cy=%2270.0%22 r=%226%22 fill=%22%23d9c2ff%22 stroke=%22%23b493ee%22 stroke-width=%221%22/%3E%3Ccircle cx=%22140%22 cy=%2272%22 r=%223.8%22 fill=%22%23ffe27a%22 stroke=%22%23e9a93a%22 stroke-width=%221%22/%3E%3Ccircle cx=%22196.0%22 cy=%2227.5%22 r=%226%22 fill=%22%23ffc2d8%22 stroke=%22%23ff8fb5%22 stroke-width=%221%22/%3E%3Ccircle cx=%22202.2%22 cy=%2232.0%22 r=%226%22 fill=%22%23ffc2d8%22 stroke=%22%23ff8fb5%22 stroke-width=%221%22/%3E%3Ccircle cx=%22199.8%22 cy=%2239.3%22 r=%226%22 fill=%22%23ffc2d8%22 stroke=%22%23ff8fb5%22 stroke-width=%221%22/%3E%3Ccircle cx=%22192.2%22 cy=%2239.3%22 r=%226%22 fill=%22%23ffc2d8%22 stroke=%22%23ff8fb5%22 stroke-width=%221%22/%3E%3Ccircle cx=%22189.8%22 cy=%2232.0%22 r=%226%22 fill=%22%23ffc2d8%22 stroke=%22%23ff8fb5%22 stroke-width=%221%22/%3E%3Ccircle cx=%22196%22 cy=%2234%22 r=%223.8%22 fill=%22%23ffe27a%22 stroke=%22%23e9a93a%22 stroke-width=%221%22/%3E%3Ccircle cx=%22100.0%22 cy=%2251.5%22 r=%226%22 fill=%22%23fff%22 stroke=%22%23e8c8dc%22 stroke-width=%221%22/%3E%3Ccircle cx=%22106.2%22 cy=%2256.0%22 r=%226%22 fill=%22%23fff%22 stroke=%22%23e8c8dc%22 stroke-width=%221%22/%3E%3Ccircle cx=%22103.8%22 cy=%2263.3%22 r=%226%22 fill=%22%23fff%22 stroke=%22%23e8c8dc%22 stroke-width=%221%22/%3E%3Ccircle cx=%2296.2%22 cy=%2263.3%22 r=%226%22 fill=%22%23fff%22 stroke=%22%23e8c8dc%22 stroke-width=%221%22/%3E%3Ccircle cx=%2293.8%22 cy=%2256.0%22 r=%226%22 fill=%22%23fff%22 stroke=%22%23e8c8dc%22 stroke-width=%221%22/%3E%3Ccircle cx=%22100%22 cy=%2258%22 r=%223.8%22 fill=%22%23ffe27a%22 stroke=%22%23e9a93a%22 stroke-width=%221%22/%3E%3C/svg%3E") left bottom/120% auto no-repeat;inset:auto auto -26% -46%;width:130%;height:62%;transform:rotate(-6deg)}
+  #bCam::after{content:"";position:absolute;width:44%;height:44%;top:-18%;right:-14%;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Cellipse cx=%2210.0%22 cy=%2230.0%22 rx=%229%22 ry=%224%22 fill=%22%237cc86a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(-35.0 10.0 30.0)%22/%3E%3Cellipse cx=%2230.0%22 cy=%2232.0%22 rx=%228%22 ry=%223.6%22 fill=%22%238fd67a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(30.0 30.0 32.0)%22/%3E%3Ccircle cx=%2220.0%22 cy=%2213.0%22 r=%226.5%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2226.7%22 cy=%2217.8%22 r=%226.5%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2224.1%22 cy=%2225.7%22 r=%226.5%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2215.9%22 cy=%2225.7%22 r=%226.5%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2213.3%22 cy=%2217.8%22 r=%226.5%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2220%22 cy=%2220%22 r=%224.2%22 fill=%22%23ffe27a%22 stroke=%22%23e9a93a%22 stroke-width=%221%22/%3E%3Ccircle cx=%2218.6%22 cy=%2218.6%22 r=%221.3%22 fill=%22%23fff%22/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none}
+  #dots i{background:#f3e3b5;box-shadow:inset 0 1px 1px rgba(0,0,0,.1)}
+  #dots i.on{background:#6ccf5f}
+
+  #panel{background:linear-gradient(180deg,#f1e9ff,#ece2fb);border-left:6px solid #d8c6f4;box-shadow:-8px 0 24px rgba(160,130,210,.2);position:relative}
+  #panel::after{content:"";position:absolute;left:-14px;bottom:-6px;width:220px;height:90px;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 220 90%22%3E%3Cpath d=%22M4 80 Q60 40 110 62 Q160 84 216 30%22 fill=%22none%22 stroke=%22%235fa85a%22 stroke-width=%222.4%22 stroke-linecap=%22round%22/%3E%3Cellipse cx=%2230.0%22 cy=%2264.0%22 rx=%229%22 ry=%224%22 fill=%22%237cc86a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(-40.0 30.0 64.0)%22/%3E%3Cellipse cx=%2252.0%22 cy=%2252.0%22 rx=%229%22 ry=%224%22 fill=%22%237cc86a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(20.0 52.0 52.0)%22/%3E%3Cellipse cx=%2280.0%22 cy=%2252.0%22 rx=%229%22 ry=%224%22 fill=%22%237cc86a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(-20.0 80.0 52.0)%22/%3E%3Cellipse cx=%22128.0%22 cy=%2270.0%22 rx=%229%22 ry=%224%22 fill=%22%237cc86a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(30.0 128.0 70.0)%22/%3E%3Cellipse cx=%22150.0%22 cy=%2274.0%22 rx=%229%22 ry=%224%22 fill=%22%237cc86a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(-30.0 150.0 74.0)%22/%3E%3Cellipse cx=%22178.0%22 cy=%2258.0%22 rx=%229%22 ry=%224%22 fill=%22%237cc86a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(20.0 178.0 58.0)%22/%3E%3Cellipse cx=%22200.0%22 cy=%2240.0%22 rx=%229%22 ry=%224%22 fill=%22%237cc86a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(-40.0 200.0 40.0)%22/%3E%3Ccircle cx=%2264.0%22 cy=%2241.5%22 r=%226%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2270.2%22 cy=%2246.0%22 r=%226%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2267.8%22 cy=%2253.3%22 r=%226%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2260.2%22 cy=%2253.3%22 r=%226%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2257.8%22 cy=%2246.0%22 r=%226%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2264%22 cy=%2248%22 r=%223.8%22 fill=%22%23ffe27a%22 stroke=%22%23e9a93a%22 stroke-width=%221%22/%3E%3Ccircle cx=%22140.0%22 cy=%2265.5%22 r=%226%22 fill=%22%23d9c2ff%22 stroke=%22%23b493ee%22 stroke-width=%221%22/%3E%3Ccircle cx=%22146.2%22 cy=%2270.0%22 r=%226%22 fill=%22%23d9c2ff%22 stroke=%22%23b493ee%22 stroke-width=%221%22/%3E%3Ccircle cx=%22143.8%22 cy=%2277.3%22 r=%226%22 fill=%22%23d9c2ff%22 stroke=%22%23b493ee%22 stroke-width=%221%22/%3E%3Ccircle cx=%22136.2%22 cy=%2277.3%22 r=%226%22 fill=%22%23d9c2ff%22 stroke=%22%23b493ee%22 stroke-width=%221%22/%3E%3Ccircle cx=%22133.8%22 cy=%2270.0%22 r=%226%22 fill=%22%23d9c2ff%22 stroke=%22%23b493ee%22 stroke-width=%221%22/%3E%3Ccircle cx=%22140%22 cy=%2272%22 r=%223.8%22 fill=%22%23ffe27a%22 stroke=%22%23e9a93a%22 stroke-width=%221%22/%3E%3Ccircle cx=%22196.0%22 cy=%2227.5%22 r=%226%22 fill=%22%23ffc2d8%22 stroke=%22%23ff8fb5%22 stroke-width=%221%22/%3E%3Ccircle cx=%22202.2%22 cy=%2232.0%22 r=%226%22 fill=%22%23ffc2d8%22 stroke=%22%23ff8fb5%22 stroke-width=%221%22/%3E%3Ccircle cx=%22199.8%22 cy=%2239.3%22 r=%226%22 fill=%22%23ffc2d8%22 stroke=%22%23ff8fb5%22 stroke-width=%221%22/%3E%3Ccircle cx=%22192.2%22 cy=%2239.3%22 r=%226%22 fill=%22%23ffc2d8%22 stroke=%22%23ff8fb5%22 stroke-width=%221%22/%3E%3Ccircle cx=%22189.8%22 cy=%2232.0%22 r=%226%22 fill=%22%23ffc2d8%22 stroke=%22%23ff8fb5%22 stroke-width=%221%22/%3E%3Ccircle cx=%22196%22 cy=%2234%22 r=%223.8%22 fill=%22%23ffe27a%22 stroke=%22%23e9a93a%22 stroke-width=%221%22/%3E%3Ccircle cx=%22100.0%22 cy=%2251.5%22 r=%226%22 fill=%22%23fff%22 stroke=%22%23e8c8dc%22 stroke-width=%221%22/%3E%3Ccircle cx=%22106.2%22 cy=%2256.0%22 r=%226%22 fill=%22%23fff%22 stroke=%22%23e8c8dc%22 stroke-width=%221%22/%3E%3Ccircle cx=%22103.8%22 cy=%2263.3%22 r=%226%22 fill=%22%23fff%22 stroke=%22%23e8c8dc%22 stroke-width=%221%22/%3E%3Ccircle cx=%2296.2%22 cy=%2263.3%22 r=%226%22 fill=%22%23fff%22 stroke=%22%23e8c8dc%22 stroke-width=%221%22/%3E%3Ccircle cx=%2293.8%22 cy=%2256.0%22 r=%226%22 fill=%22%23fff%22 stroke=%22%23e8c8dc%22 stroke-width=%221%22/%3E%3Ccircle cx=%22100%22 cy=%2258%22 r=%223.8%22 fill=%22%23ffe27a%22 stroke=%22%23e9a93a%22 stroke-width=%221%22/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none;z-index:2}
+  #tabs{border-bottom:4px solid #dccdf6;background:linear-gradient(180deg,#efe6ff,#e9ddfb)}
+  .tab{background:linear-gradient(180deg,#fffcf3,#fff3df);border:3px solid #d6c4f2;border-radius:16px;box-shadow:0 4px 0 #cdb9ee,inset 0 2px 0 #fff;position:relative}
+  .tab::after{content:"";position:absolute;top:-9px;right:-8px;width:24px;height:24px;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Cellipse cx=%2210.0%22 cy=%2230.0%22 rx=%229%22 ry=%224%22 fill=%22%237cc86a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(-35.0 10.0 30.0)%22/%3E%3Cellipse cx=%2230.0%22 cy=%2232.0%22 rx=%228%22 ry=%223.6%22 fill=%22%238fd67a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(30.0 30.0 32.0)%22/%3E%3Ccircle cx=%2220.0%22 cy=%2213.0%22 r=%226.5%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2226.7%22 cy=%2217.8%22 r=%226.5%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2224.1%22 cy=%2225.7%22 r=%226.5%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2215.9%22 cy=%2225.7%22 r=%226.5%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2213.3%22 cy=%2217.8%22 r=%226.5%22 fill=%22%23ffb3cf%22 stroke=%22%23ff86b0%22 stroke-width=%221%22/%3E%3Ccircle cx=%2220%22 cy=%2220%22 r=%224.2%22 fill=%22%23ffe27a%22 stroke=%22%23e9a93a%22 stroke-width=%221%22/%3E%3Ccircle cx=%2218.6%22 cy=%2218.6%22 r=%221.3%22 fill=%22%23fff%22/%3E%3C/svg%3E") center/contain no-repeat;pointer-events:none}
+  .tab:nth-child(2n)::after{background-image:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22%3E%3Cellipse cx=%2210.0%22 cy=%2230.0%22 rx=%229%22 ry=%224%22 fill=%22%237cc86a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(-35.0 10.0 30.0)%22/%3E%3Cellipse cx=%2230.0%22 cy=%2232.0%22 rx=%228%22 ry=%223.6%22 fill=%22%238fd67a%22 stroke=%22%233f8a45%22 stroke-width=%221%22 transform=%22rotate(30.0 30.0 32.0)%22/%3E%3Ccircle cx=%2220.0%22 cy=%2213.0%22 r=%226.5%22 fill=%22%23d9c2ff%22 stroke=%22%23b493ee%22 stroke-width=%221%22/%3E%3Ccircle cx=%2226.7%22 cy=%2217.8%22 r=%226.5%22 fill=%22%23d9c2ff%22 stroke=%22%23b493ee%22 stroke-width=%221%22/%3E%3Ccircle cx=%2224.1%22 cy=%2225.7%22 r=%226.5%22 fill=%22%23d9c2ff%22 stroke=%22%23b493ee%22 stroke-width=%221%22/%3E%3Ccircle cx=%2215.9%22 cy=%2225.7%22 r=%226.5%22 fill=%22%23d9c2ff%22 stroke=%22%23b493ee%22 stroke-width=%221%22/%3E%3Ccircle cx=%2213.3%22 cy=%2217.8%22 r=%226.5%22 fill=%22%23d9c2ff%22 stroke=%22%23b493ee%22 stroke-width=%221%22/%3E%3Ccircle cx=%2220%22 cy=%2220%22 r=%224.2%22 fill=%22%23ffe27a%22 stroke=%22%23e9a93a%22 stroke-width=%221%22/%3E%3Ccircle cx=%2218.6%22 cy=%2218.6%22 r=%221.3%22 fill=%22%23fff%22/%3E%3C/svg%3E")}
+  .tab small{color:#8b6aa6}
+  .tab.on{background:linear-gradient(160deg,#ffd6f0,#e6b8f6);border-color:#c69be8;box-shadow:0 4px 0 #b588d8,0 0 0 3px #fff,0 0 14px rgba(230,150,230,.6)}
+  .tab.on small{color:#8a3fa8}
+  #body{background:linear-gradient(180deg,#f8f1ff,#f3eaff);margin:10px;border-radius:22px;border:3px solid #e2d3f8;box-shadow:inset 0 2px 8px rgba(160,130,210,.15)}
+  #palette{background:linear-gradient(180deg,#e3f4ff,#cdeaff);border:3px solid #fff;box-shadow:0 0 0 2px #c9dcf6,inset 0 2px 6px rgba(80,140,200,.15)}
+  .sw{border:3px solid #fff;box-shadow:inset -4px -6px 6px rgba(0,0,0,.18),inset 4px 5px 6px rgba(255,255,255,.6),0 3px 4px rgba(90,110,170,.2)}
+  .sw.on{box-shadow:0 0 0 3px #fff,0 0 0 6px #6fa9ec,inset -4px -6px 6px rgba(0,0,0,.18),inset 4px 5px 6px rgba(255,255,255,.6)}
+  .card{position:relative;background:radial-gradient(circle at 50% 40%,#fffafd,#fde9f3 75%);border:3px solid #f0b6d2;border-radius:22px;
+    box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 5px #f8d6e6,0 4px 0 #ecc3dd;padding:10px 8px 8px}
+  .card::before{content:"";position:absolute;inset:5px;background:url("data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22 preserveAspectRatio=%22none%22%3E%3Cpath d=%22M7 26 Q7 7 26 7%22 fill=%22none%22 stroke=%22%23eaa7c8%22 stroke-width=%221.6%22/%3E%3Cpath d=%22M12 22 Q12 12 22 12%22 fill=%22none%22 stroke=%22%23eaa7c8%22 stroke-width=%221%22/%3E%3Cpath d=%22M26 7 q6 -1 7 4 q-3 3 -6 0%22 fill=%22none%22 stroke=%22%23eaa7c8%22 stroke-width=%221.2%22/%3E%3Cpath d=%22M7 26 q-1 6 4 7 q3 -3 0 -6%22 fill=%22none%22 stroke=%22%23eaa7c8%22 stroke-width=%221.2%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%221.6%22 fill=%22%23eaa7c8%22/%3E%3Cg transform=%22translate(100,0) scale(-1,1)%22%3E%3Cpath d=%22M7 26 Q7 7 26 7%22 fill=%22none%22 stroke=%22%23eaa7c8%22 stroke-width=%221.6%22/%3E%3Cpath d=%22M12 22 Q12 12 22 12%22 fill=%22none%22 stroke=%22%23eaa7c8%22 stroke-width=%221%22/%3E%3Cpath d=%22M26 7 q6 -1 7 4 q-3 3 -6 0%22 fill=%22none%22 stroke=%22%23eaa7c8%22 stroke-width=%221.2%22/%3E%3Cpath d=%22M7 26 q-1 6 4 7 q3 -3 0 -6%22 fill=%22none%22 stroke=%22%23eaa7c8%22 stroke-width=%221.2%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%221.6%22 fill=%22%23eaa7c8%22/%3E%3C/g%3E%3Cg transform=%22translate(0,100) scale(1,-1)%22%3E%3Cpath d=%22M7 26 Q7 7 26 7%22 fill=%22none%22 stroke=%22%23eaa7c8%22 stroke-width=%221.6%22/%3E%3Cpath d=%22M12 22 Q12 12 22 12%22 fill=%22none%22 stroke=%22%23eaa7c8%22 stroke-width=%221%22/%3E%3Cpath d=%22M26 7 q6 -1 7 4 q-3 3 -6 0%22 fill=%22none%22 stroke=%22%23eaa7c8%22 stroke-width=%221.2%22/%3E%3Cpath d=%22M7 26 q-1 6 4 7 q3 -3 0 -6%22 fill=%22none%22 stroke=%22%23eaa7c8%22 stroke-width=%221.2%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%221.6%22 fill=%22%23eaa7c8%22/%3E%3C/g%3E%3Cg transform=%22translate(100,100) scale(-1,-1)%22%3E%3Cpath d=%22M7 26 Q7 7 26 7%22 fill=%22none%22 stroke=%22%23eaa7c8%22 stroke-width=%221.6%22/%3E%3Cpath d=%22M12 22 Q12 12 22 12%22 fill=%22none%22 stroke=%22%23eaa7c8%22 stroke-width=%221%22/%3E%3Cpath d=%22M26 7 q6 -1 7 4 q-3 3 -6 0%22 fill=%22none%22 stroke=%22%23eaa7c8%22 stroke-width=%221.2%22/%3E%3Cpath d=%22M7 26 q-1 6 4 7 q3 -3 0 -6%22 fill=%22none%22 stroke=%22%23eaa7c8%22 stroke-width=%221.2%22/%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%221.6%22 fill=%22%23eaa7c8%22/%3E%3C/g%3E%3C/svg%3E") center/100% 100% no-repeat;pointer-events:none}
+  .card svg{position:relative}
+  .card img{position:relative;width:100%;flex:1;min-height:0;object-fit:contain;border-radius:10px}
+  .card span{position:relative;background:#fff;border:2px solid #f0c2da;border-radius:999px;padding:0 10px;color:#7a5a8e;font-size:11px;margin-top:2px;white-space:nowrap;box-shadow:0 1px 0 #f3d4e4}
+  .card.on{border-color:#e27fb6;box-shadow:inset 0 0 0 3px #fff,inset 0 0 0 5px #f6c0dc,0 0 0 3px #fff,0 0 0 6px #f0a8cf,0 0 16px rgba(240,140,200,.55)}
+  .polaroid{background:linear-gradient(180deg,#fffdf8,#fff4ea);border:4px solid #f0c2da}
   /* ---------- 直式 / 手機 ---------- */
   @media (max-aspect-ratio: 1/1){
     #app{flex-direction:column}
@@ -142,11 +192,11 @@
     #grid{grid-template-columns:repeat(3,1fr);gap:10px}
     :root{--bs:36px}
     .rbtn{box-shadow:0 0 0 3px #fff,0 4px 8px rgba(90,100,180,.25)}
-    #bHome,#bUndo,#bDice,#bSound{top:10px}
-    #bHome{left:10px}
-    #bUndo{left:calc(10px + var(--bs)*1.3)}
-    #bDice{left:calc(10px + var(--bs)*2.6)}
-    #bSound{left:calc(10px + var(--bs)*3.9)}
+    #bHome,#bUndo,#bDice,#bSound{top:12px}
+    #bHome{left:12px}
+    #bUndo{left:calc(12px + var(--bs)*1.6)}
+    #bDice{left:calc(12px + var(--bs)*3.2)}
+    #bSound{left:calc(12px + var(--bs)*4.8)}
     #nextWrap{top:6px;right:12px;gap:5px}
     #dots{gap:3px}
     #dots i{width:6px;height:6px}
@@ -162,6 +212,18 @@
     #palette{width:44px;gap:8px;padding:8px 0;border-radius:16px}
     .sw{width:30px;height:30px;border-width:2px}
     .sw.spark svg{width:18px;height:18px}
+  }
+
+  @media (max-aspect-ratio: 1/1){
+    #panel{border-left:none;border-top:5px solid #d8c6f4}
+    #panel::before{display:none}
+    #panel::after{width:150px;height:60px}
+    #body{margin:6px}
+    .tab::after{width:14px;height:14px;top:-6px;right:-5px}
+    .card{padding:6px 4px 4px;border-radius:14px}
+    .card::before{inset:3px}
+    .card span{font-size:9px;padding:0 6px;border-width:1.5px}
+    #bCam::after{top:-22%;right:-18%}
   }
 </style>
 </head>
@@ -220,12 +282,20 @@
   </div>
 </div>
 
+<script src="assets/art.js"></script>
 <script>
 /* ================= 基本工具 ================= */
 const OL = '#3b2317';
 const $ = s => document.querySelector(s);
 function hex2rgb(h){h=h.replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');const n=parseInt(h,16);return[n>>16&255,n>>8&255,n&255];}
 function mix(a,b,t){const A=hex2rgb(a),B=hex2rgb(b);return '#'+A.map((v,i)=>Math.round(v+(B[i]-v)*t).toString(16).padStart(2,'0')).join('');}
+const LINE_SCALE=.62;
+function soften(svg,col,k=LINE_SCALE){
+  return svg.replace(/<[^>]+>/g,tag=>{if(tag.indexOf('stroke="'+OL+'"')<0)return tag;
+    tag=tag.replace(/stroke-width="([\d.]+)"/,(m,w)=>`stroke-width="${(+w*k).toFixed(2)}"`);
+    return col?tag.split('stroke="'+OL+'"').join('stroke="'+col+'"'):tag;});
+}
+const lineOf=(c,k='#3a1a20',t=.58)=>mix(c.startsWith('#')?c:'#c08080',k,t);
 const P=(d,f,sw=5,ex='')=>`<path d="${d}" fill="${f}" stroke="${OL}" stroke-width="${sw}" stroke-linejoin="round" stroke-linecap="round" ${ex}/>`;
 const L=(d,c=OL,sw=4,ex='')=>`<path d="${d}" fill="none" stroke="${c}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round" ${ex}/>`;
 const C=(cx,cy,r,f,sw=5)=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${f}" stroke="${sw?OL:'none'}" stroke-width="${sw}"/>`;
@@ -259,6 +329,7 @@ function buildStaticDefs(){
     <pattern id="glit" width="60" height="60" patternUnits="userSpaceOnUse">${g}</pattern>
     <pattern id="pWall" width="140" height="140" patternUnits="userSpaceOnUse">${wall}</pattern>
     <pattern id="pHeart" width="130" height="130" patternUnits="userSpaceOnUse">${hearts}</pattern>
+    <radialGradient id="gBlush"><stop offset="0" stop-color="#ff8fa0" stop-opacity=".55"/><stop offset="1" stop-color="#ff8fa0" stop-opacity="0"/></radialGradient>
     <radialGradient id="gSpot"><stop offset="0" stop-color="#fff" stop-opacity=".75"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></radialGradient>
     <linearGradient id="gBeam" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff6b0" stop-opacity=".9"/><stop offset="1" stop-color="#fff6b0" stop-opacity="0"/></linearGradient>
     <linearGradient id="gDream" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe3f1"/><stop offset="1" stop-color="#eadcff"/></linearGradient>
@@ -272,7 +343,7 @@ function grad(id,c){return `<linearGradient id="${id}" x1="0" y1="0" x2="0" y2="
 function irisGrad(c){return `<linearGradient id="gIris" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix(c,'#000',.5)}"/><stop offset=".55" stop-color="${c}"/><stop offset="1" stop-color="${mix(c,'#fff',.4)}"/></linearGradient>`;}
 
 /* ================= 身體 / 頭 ================= */
-const SKINS=[{n:'粉嫩',c:'#ffd6d0'},{n:'白皙',c:'#fff1e8'},{n:'蜜桃',c:'#ffd8b4'},{n:'小麥',c:'#e6ae82'},{n:'可可',c:'#8e5a3c'}];
+const SKINS=[{n:'粉嫩',c:'#ffe1d6'},{n:'白皙',c:'#fff1e8'},{n:'蜜桃',c:'#ffd8b4'},{n:'小麥',c:'#e6ae82'},{n:'可可',c:'#8e5a3c'}];
 const ARM='M168 328 C150 336 136 356 128 382 C124 396 122 408 132 412 C142 415 148 404 150 394 C154 378 160 364 172 352 Z';
 const LEG='M170 405 L170 500 Q170 510 181 510 Q192 510 192 500 L192 405 Z';
 function bodySVG(sk){
@@ -280,7 +351,9 @@ function bodySVG(sk){
 }
 const faceShape=sk=>C(92,234,20,sk)+C(308,234,20,sk)+E(200,215,108,98,sk);
 function headSVG(sk){
-  return E(200,319,36,9,'#7a3f55',0,'opacity=".22"')+faceShape(sk)+E(136,276,20,12,'#ff8f9c',0,'opacity=".5"')+E(264,276,20,12,'#ff8f9c',0,'opacity=".5"')+L('M195 266 Q200 271 205 266',OL,4);
+  return E(200,319,36,9,'#7a3f55',0,'opacity=".22"')+faceShape(sk)+E(134,274,30,17,'url(#gBlush)',0)+E(266,274,30,17,'url(#gBlush)',0)
+    +L('M124 270 l-4 7 M133 270 l-4 7 M142 270 l-4 7 M258 270 l-4 7 M267 270 l-4 7 M276 270 l-4 7','#ff7f96',1.4,'opacity=".45"')
+    +L('M197 264 Q200 267 203 264','#c07a6a',2.6);
 }
 
 /* ================= 髮型 ================= */
@@ -312,7 +385,7 @@ const HAIRS=[
   {n:'高丸子',  back:h=>bun(200,74,42,h)+P(HB_SHORT,h.c), front:h=>P(HF_SWEEP,h.c)+L('M150 160 Q190 140 250 150',h.dk,3)},
   {n:'俏短髮',  back:h=>P(HB_SHORT,h.c),                front:h=>P(HF_SPIKY,h.c)},
 ];
-const HAIR_COLORS=['#a3640e','#5d3417','#2e2a33','#f2c14e','#ff9ec7','#b99cff','#7cc7f2','#d9632b','#eeeeee'];
+const HAIR_COLORS=['#7a4a32','#a3640e','#5d3417','#2e2a33','#f2c14e','#ff9ec7','#b99cff','#7cc7f2','#d9632b','#eeeeee'];
 /* ================= 10 款精緻新髮型 ================= */
 const HP=(d,h,sw=5)=>`<path d="${d}" fill="${h.c}"/>`+(h.thumb?'':`<path d="${d}" fill="url(#shRound)" opacity=".7"/>`)+P(d,'none',sw);
 const HL=(d,h,w=3)=>L(d,h.dk,w,'opacity=".75"');                 // 髮絲線
@@ -429,8 +502,23 @@ const shine='<path d="M140 120 Q165 102 192 100" fill="none" stroke="#fff" strok
 const EY=232;
 const brow=cx=>L(`M${cx-20} ${EY-56} Q${cx} ${EY-66} ${cx+20} ${EY-58}`,OL,5);
 const lash=(cx,o)=>L(`M${cx-31} ${EY-6} Q${cx} ${EY-58} ${cx+31} ${EY-6}`,OL,7)+L(`M${cx+31*o} ${EY-6} L${cx+41*o} ${EY-16}`,OL,5);
-function eyeBig(cx,o,ir){return `<g class="blink">`+E(cx,EY,28,32,'#fff',4)+E(cx,EY+4,23,27,ir,0)+E(cx,EY+7,12,14,'#1b100b',0)
-  +C(cx-9,EY-6,7,'#fff',0)+C(cx+8,EY+15,3.5,'#fff',0)+`</g>`+lash(cx,o)+brow(cx);}
+function eyeBig(cx,o,ir){
+  const ox=cx+31*o;
+  return `<g class="blink">`
+    +`<path d="M${cx-30} ${EY-2} Q${cx-29} ${EY-34} ${cx} ${EY-35} Q${cx+29} ${EY-34} ${cx+30} ${EY-2} Q${cx+29} ${EY+30} ${cx} ${EY+32} Q${cx-29} ${EY+30} ${cx-30} ${EY-2} Z" fill="#fff"/>`
+    +E(cx,EY+3,24,29,ir,0)
+    +`<path d="M${cx-24} ${EY+3} A24 29 0 0 1 ${cx+24} ${EY+3} Q${cx} ${EY-9} ${cx-24} ${EY+3} Z" fill="#2a1410" opacity=".4"/>`
+    +E(cx,EY+6,11,14,'#1a0c08',0)
+    +`<ellipse cx="${cx}" cy="${EY+3}" rx="24" ry="29" fill="none" stroke="#3a1a12" stroke-width="2" stroke-opacity=".55"/>`
+    +E(cx,EY+19,15,8,'#fff',0,'opacity=".25"')
+    +E(cx-9,EY-8,7.5,9,'#fff',0)+C(cx+10,EY+16,3.2,'#fff',0)+C(cx-12,EY+13,1.7,'#fff',0)
+    +`<path d="${star(cx+10,EY-9,5,1.4,4)}" fill="#fff"/></g>`
+    +L(`M${cx-31} ${EY-1} Q${cx-27} ${EY-37} ${cx+1} ${EY-37} Q${cx+29} ${EY-36} ${cx+32} ${EY-5}`,'#2a1410',5)
+    +L(`M${ox} ${EY-6} l${9*o} -9 M${ox-3*o} ${EY-15} l${9*o} -7 M${ox-8*o} ${EY-23} l${7*o} -7`,'#2a1410',3)
+    +L(`M${cx-25} ${EY+24} Q${cx} ${EY+37} ${cx+25} ${EY+24}`,'#7a4a3a',1.6,'opacity=".6"')
+    +L(`M${cx-23} ${EY-45} Q${cx} ${EY-53} ${cx+26} ${EY-43}`,'#a06050',1.8,'opacity=".55"')
+    +L(`M${cx-20} ${EY-63} Q${cx} ${EY-71} ${cx+22} ${EY-63}`,'#7a4a32',3.5,'opacity=".85"');
+}
 const EYES=[
   {n:'閃亮大眼',d:ir=>eyeBig(150,-1,ir)+eyeBig(250,1,ir)},
   {n:'水汪汪',d:ir=>[[150,-1],[250,1]].map(([cx,o])=>`<g class="blink">`+E(cx,EY,30,34,'#fff',4)+E(cx,EY+4,25,29,ir,0)+E(cx,EY+6,13,15,'#1b100b',0)
@@ -448,7 +536,7 @@ const EYE_COLORS=['#9a4a1a','#3a7bd5','#2fa36b','#8a55d6','#e0507a','#4a4a55'];
 /* ================= 嘴巴 ================= */
 const MR='#b8324a';
 const MOUTHS=[
-  {n:'開心笑',d:()=>P('M178 281 Q200 288 222 281 Q220 306 200 307 Q180 306 178 281 Z',MR,4)+`<path d="M188 300 Q200 292 212 300 Q206 306 200 306 Q194 306 188 300 Z" fill="#ff8fa3"/>`},
+  {n:'開心笑',d:()=>P('M185 283 Q200 288 215 283 Q213 300 200 301 Q187 300 185 283 Z','#c8435e',3.5)+`<path d="M191 296 Q200 290 209 296 Q205 300 200 300 Q195 300 191 296 Z" fill="#ff9aac"/><path d="M188 285 Q200 289 212 285" fill="none" stroke="#fff" stroke-width="2" opacity=".7"/>`},
   {n:'微微笑',d:()=>L('M182 284 Q200 300 218 284',OL,5)},
   {n:'貓咪嘴',d:()=>L('M178 283 Q189 297 200 285 Q211 297 222 283',OL,5)},
   {n:'露齒笑',d:()=>P('M174 280 Q200 288 226 280 Q222 310 200 311 Q178 310 174 280 Z',MR,4)+`<path d="M180 284 Q200 290 220 284 L219 292 Q200 296 181 292 Z" fill="#fff"/>`},
@@ -537,6 +625,9 @@ function princessDress(o){
   s+=P(`M160 322 Q200 314 240 322 L240 333${sc(240,160,333,8,9)} Z`,T?'#fff':'#fffaf3',3.5);                      // 蕾絲披肩領
   for(let i=0;i<8;i++){const x=165+10*i;s+=`<circle cx="${x}" cy="${337}" r="2" fill="#e8d3ee"/>`;}
   s+=ST('M166 327 Q200 320 234 327',o,'#d7bfe3');
+  const bc=T?'#fff':mix(o.c,'#e0457a',.3);
+  [[148,450,.42],[252,450,.42],[124,486,.4],[276,486,.4],[110,508,.34],[290,508,.34]].forEach(([x,y,k])=>s+=bowAt(x,y,k,bc,true,o));
+  s+=both(L('M138 470 Q150 480 166 474',T?OL:'#fff',2,'opacity=".8" stroke-dasharray="2 3"'));
   s+=necklace(o)+bowAt(200,356,.42,pink,false,o)+bowAt(200,404,.55,pink,true,o);
   return s;
 }
@@ -604,7 +695,7 @@ const OUTFITS=[
   {n:'公主禮服',d:princessDress},{n:'水手服',d:sailor},{n:'吊帶褲',d:overalls},
   {n:'芭蕾蓬裙',d:tutu},{n:'連帽上衣',d:hoodie},{n:'圓領洋裝',d:collarDress},
 ];
-const OUTFIT_COLORS=['#a44de0','#ff7eb6','#6fb7ff','#56c7a4','#ffc94d','#ff8a65','#ffffff','#3a3566'];
+const OUTFIT_COLORS=['#ffa6cf','#a44de0','#ff7eb6','#6fb7ff','#56c7a4','#ffc94d','#ff8a65','#ffffff','#3a3566'];
 
 /* ---------- 20 款洋裝（裙型 × 領口 × 袖子 × 印花 × 裝飾） ---------- */
 const SKIRT={
@@ -945,15 +1036,7 @@ function accDefs(){return `
 
 /* ================= 背景場景 ================= */
 const SCENES=[
-  {n:'奶油房間',bg:'#fff0a8',d:()=>`<rect x="-1000" y="-600" width="2700" height="2000" fill="#fff0a8"/><rect x="-1000" y="-600" width="2700" height="1200" fill="url(#pWall)"/>
-    <ellipse cx="350" cy="360" rx="270" ry="250" fill="url(#gSpot)"/>
-    <g stroke="${OL}" stroke-width="5" stroke-linejoin="round"><rect x="34" y="150" width="120" height="150" rx="14" fill="#c9ecff"/>
-      <path d="M94 150 V300 M34 225 H154" fill="none"/><path d="M26 140 Q60 250 40 318 L26 318 Z" fill="#ffb3cf"/><path d="M162 140 Q128 250 148 318 L162 318 Z" fill="#ffb3cf"/>
-      <path d="M570 540 L650 540 L640 598 L580 598 Z" fill="#ff9e7a"/></g>
-    <g stroke="${OL}" stroke-width="4"><path d="M610 540 Q600 480 575 470 M610 540 Q615 470 640 455" fill="none"/>
-      <circle cx="575" cy="468" r="14" fill="#ff9ec7"/><circle cx="640" cy="452" r="14" fill="#fff08a"/><circle cx="608" cy="490" r="12" fill="#b99cff"/></g>
-    <rect x="-1000" y="590" width="2700" height="800" fill="#f8c99b"/><rect x="-1000" y="584" width="2700" height="10" fill="#f6a58c"/>
-    <path d="M20 640 H120 M180 690 H320 M420 648 H560 M600 700 H690 M40 705 H110" stroke="#f3a48c" stroke-width="4" stroke-linecap="round"/>`},
+  {n:'奶油房間',bg:'#ffe6c8',d:()=>sRoom()},
   {n:'攝影棚',bg:'#fff3c9',d:()=>`<rect x="-1000" y="-600" width="2700" height="2000" fill="#fff3c9"/><rect x="-1000" y="-600" width="2700" height="1200" fill="url(#pWall)"/>
     <path d="M0 0 Q60 300 40 600 L0 600 Z M700 0 Q640 300 660 600 L700 600 Z" fill="#ffb3cf" stroke="${OL}" stroke-width="5"/>
     <path d="M40 300 Q55 305 70 298 M660 300 Q645 305 630 298" stroke="#ff8fb8" stroke-width="6" stroke-linecap="round"/>
@@ -986,6 +1069,35 @@ const SCENES=[
 ];
 
 /* ================= 10 款精緻場景 ================= */
+function sRoom(){
+  const r=rng(5);
+  let s=`<defs>${LG('b0w',['#ffd1d6','#ffe6c0','#fff3b8'],1,0)}${LG('b0f',['#f7c2a4','#fbd9b0'],1,0)}${LG('b0wood',['#c98a62','#a0603e'],1,0)}${LG('b0cur',['#ffc4d8','#ff9ec0'],1,0)}${LG('b0sky',['#bfe6ff','#eaf7ff'])}${LG('b0pot',['#efe6ff','#d8c8f2'])}${RG('b0glow','#fffbe8',.85)}</defs>`;
+  s+=BGR('url(#b0w)')+`<rect x="-1000" y="-600" width="2700" height="1180" fill="url(#pWall)" opacity=".8"/>`;
+  s+=`<ellipse cx="350" cy="330" rx="300" ry="280" fill="url(#b0glow)"/>`;
+  // 腰線蕾絲
+  s+=`<rect x="-1000" y="566" width="2700" height="26" fill="#fff4f6"/>`;
+  let lace='';for(let x=-40;x<760;x+=20)lace+=`<circle cx="${x}" cy="592" r="9" fill="#fff4f6"/><circle cx="${x}" cy="592" r="2.4" fill="#f3c6d6"/>`;
+  s+=lace+L('M-40 572 L760 572 M-40 586 L760 586','#f3c6d6',1.5,'stroke-dasharray="4 4"');
+  for(let x=-30;x<760;x+=40)s+=`<path d="M${x} 579 l6 -5 l6 5 l-6 5 Z" fill="#f7d3e0"/>`;
+  s+=FLR(600,'url(#b0f)');
+  s+=L('M30 650 H150 M210 700 H350 M450 660 H600 M620 705 H700','#f2b394',3,'opacity=".7"');
+  // 打開的窗戶 + 粉紅窗簾
+  s+=`<rect x="62" y="140" width="136" height="164" fill="url(#b0sky)" ${so(4)}/>`+cloud(110,250,.5,'#fff',.9)+cloud(170,200,.35,'#fff',.8);
+  s+=`<path d="M62 140 L22 128 L22 318 L62 304 Z" fill="url(#b0wood)" ${so(4)}/><path d="M198 140 L238 128 L238 318 L198 304 Z" fill="url(#b0wood)" ${so(4)}/>`
+    +L('M30 172 L56 174 M30 216 L56 216 M30 262 L56 260 M43 132 L43 314 M204 174 L230 172 M204 216 L230 216 M204 260 L230 262 M217 132 L217 314','#7a4a32',2.5);
+  s+=`<rect x="54" y="130" width="152" height="12" rx="3" fill="url(#b0wood)" ${so(3.5)}/><rect x="50" y="300" width="160" height="12" rx="3" fill="url(#b0wood)" ${so(3.5)}/>`;
+  const cur=`<path d="M64 136 L112 136 Q100 190 84 214 Q96 264 92 312 L66 312 Q74 262 70 214 Q60 180 64 136 Z" fill="url(#b0cur)" ${so(3.5)}/>`+L('M76 142 Q78 180 76 210 M90 142 Q92 180 86 210 M78 222 Q82 266 78 306 M86 222 Q90 266 86 306','#ff86b0',1.6,'opacity=".7"')+`<ellipse cx="82" cy="214" rx="10" ry="5" fill="#ff86b0" ${so(2.5)}/>`;
+  s+=cur+`<g transform="translate(260,0) scale(-1,1)">${cur}</g>`;
+  // 小盆花
+  s+=`<g transform="translate(586,0)"><path d="M0 560 Q-4 520 -24 492 M0 560 Q8 520 28 486 M0 560 Q-2 530 2 500" fill="none" stroke="#5fae5f" stroke-width="4" stroke-linecap="round"/>`
+    +`<path d="M-4 530 Q-26 520 -30 506 Q-12 508 -4 530 Z M4 524 Q24 512 30 498 Q12 502 4 524 Z" fill="#7fcf7a" ${so(2.5)}/>`
+    +flw(-24,488,8,'#c9a6ff','#ffe066',2.5)+`<path d="M18 486 Q20 462 30 458 Q40 462 42 486 Q30 494 18 486 Z M24 470 Q30 452 36 470" fill="#ff9ec0" ${so(2.5)}/>`+`<path d="M24 476 Q30 466 36 476" fill="none" stroke="#fff" stroke-width="2" opacity=".7"/>`
+    +`<path d="M-30 556 L30 556 L24 608 Q0 616 -24 608 Z" fill="url(#b0pot)" ${so(3.5)}/><rect x="-34" y="548" width="68" height="12" rx="5" fill="#f3ecff" ${so(3)}/>`
+    +[[-14,578],[10,590],[-4,598],[14,570]].map(([x,y])=>tw(x,y,3.5,'#fff')).join('')+`</g>`;
+  for(let i=0;i<26;i++){const x=r()*720-10,y=r()*560;s+=i%3?`<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${(1+r()*2.5).toFixed(1)}" fill="#fff" opacity="${(.5+r()*.5).toFixed(2)}"/>`:tw(x,y,3+r()*5,'#fff',.95);}
+  return s;
+}
+
 const so=(w=4)=>`stroke="${OL}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round"`;
 const BGR=f=>`<rect x="-1000" y="-600" width="2700" height="2000" fill="${f}"/>`;
 const FLR=(y,f,edge)=>`<rect x="-1000" y="${y}" width="2700" height="900" fill="${f}"/>`+(edge?`<rect x="-1000" y="${y-5}" width="2700" height="10" fill="${edge}"/>`:'');
@@ -1325,9 +1437,74 @@ const TABS=[
 ];
 const FX_POS={skin:[200,215],hair:[200,120],eyes:[200,232],mouth:[200,292],outfit:[200,400],shoes:[200,505],acc:[200,110]};
 
+/* ================= 圖片素材（資料夾版）=================
+   在 assets/manifest.js 裡登記 PNG 圖片，就會自動加進對應分頁。
+   角色圖片：800×1120 透明 PNG（對應遊戲座標 400×560）；場景圖片：1400×1440。 */
+const ASSET=window.DOLL_ASSETS||null,IMGCACHE={};
+const ipath=p=>((ASSET&&ASSET.base)||'assets/')+p;
+const isrc=p=>IMGCACHE[p]||ipath(p);
+const IMG=p=>p?`<image href="${isrc(p)}" x="0" y="0" width="400" height="560" preserveAspectRatio="xMidYMid meet"/>`:'';
+const IMGCATS=new Set();
+function applyAssets(){
+  if(!ASSET)return;
+  const keep=!!ASSET.keepBuiltIn;
+  const use=(key,arr,make,keepFirst)=>{const list=ASSET[key];if(!list||!list.length)return;
+    const made=list.map(make);
+    if(keep)arr.push(...made);else{const first=keepFirst?arr.slice(0,1):[];arr.length=0;arr.push(...first,...made);IMGCATS.add(key==='body'?'skin':key);}};
+  use('body',SKINS,it=>({n:it.name,c:it.color||'#ffe1d6',img:it.img}));
+  use('hair',HAIRS,it=>({n:it.name,img:1,back:()=>IMG(it.back),front:()=>IMG(it.front)}));
+  use('eyes',EYES,it=>({n:it.name,img:1,d:()=>IMG(it.img)}));
+  use('mouth',MOUTHS,it=>({n:it.name,img:1,d:()=>IMG(it.img)}));
+  use('outfit',OUTFITS,it=>({n:it.name,img:1,d:()=>IMG(it.img)}));
+  use('shoes',SHOES,it=>({n:it.name,img:1,d:()=>IMG(it.img)}));
+  use('acc',ACCS,it=>({n:it.name,img:1,back:it.back?()=>IMG(it.back):null,front:(it.img||it.front)?()=>IMG(it.img||it.front):null}),true);
+  use('bg',SCENES,it=>({n:it.name,bg:it.color||'#ffeede',img:1,d:()=>`<rect x="-1000" y="-600" width="2700" height="2000" fill="${it.color||'#ffeede'}"/><image href="${isrc(it.img)}" x="0" y="0" width="700" height="720" preserveAspectRatio="xMidYMid slice"/>`}));
+}
+applyAssets();
+async function preloadAssets(){               // 轉成內嵌資料，拍照存圖時才會包含圖片
+  if(!/^https?:$/.test(location.protocol))return;
+  if(ART){const ps=new Set();const w=v=>{if(typeof v==='string'&&/\.(png|jpe?g|webp)$/i.test(v))ps.add(v);else if(v&&typeof v==='object')Object.values(v).forEach(w);};w(ART);
+    await Promise.all([...ps].map(async p=>{try{const r=await fetch(asrc(p));if(!r.ok)return;const b=await r.blob();IMGCACHE['art:'+p]=await new Promise(res=>{const fr=new FileReader();fr.onload=()=>res(fr.result);fr.readAsDataURL(b);});}catch(e){}}));
+    render();}
+  if(!ASSET)return;
+  const paths=new Set();
+  const walk=v=>{if(typeof v==='string'&&/\.(png|jpe?g|webp)$/i.test(v))paths.add(v);else if(v&&typeof v==='object')Object.values(v).forEach(walk);};
+  walk(ASSET);
+  await Promise.all([...paths].map(async p=>{try{const r=await fetch(ipath(p));if(!r.ok)return;const b=await r.blob();
+    IMGCACHE[p]=await new Promise(res=>{const fr=new FileReader();fr.onload=()=>res(fr.result);fr.readAsDataURL(b);});}catch(e){}}));
+  render();renderPanel();
+}
+
+
+/* ================= 新畫風（圖片版）================= */
+const ART=window.DOLL_ART||null;
+const AK=0.375, ATX=200-509*0.375, ATY=-55, ACHIN=346;
+const asrc=p=>IMGCACHE['art:'+p]||((ART&&ART.base)||'assets/art/')+p;
+const aimg=(it,clip)=>(it&&it.img)?`<image href="${asrc(it.img)}" x="${it.at?it.at[0]:0}" y="${it.at?it.at[1]:0}" width="${it.size?it.size[0]:ART.canvas[0]}" height="${it.size?it.size[1]:ART.canvas[1]}" preserveAspectRatio="none"${clip?' clip-path="url(#artFront)"':''}/>`:'';
+if(ART){
+  const fill=(arr,list,extra)=>{arr.length=0;if(extra)arr.push(extra);list.forEach(it=>arr.push({n:it.name,art:it,c:'#ffe1d6',d:()=>'',back:()=>'',front:()=>''}));};
+  fill(SKINS,ART.body);fill(HAIRS,ART.hair);fill(MOUTHS,ART.mouth);fill(OUTFITS,ART.outfit);
+  fill(ACCS,ART.acc,{n:'不戴'});
+  EYES.length=0;EYES.push({n:'預設',d:()=>''});SHOES.length=0;SHOES.push({n:'預設',d:()=>''});
+  for(let i=TABS.length-1;i>=0;i--){if(TABS[i].key==='eyes'||TABS[i].key==='shoes')TABS.splice(i,1);else if(TABS[i].key!=='bg')TABS[i].colors=null;}
+  FX_POS.hair=[200,20];FX_POS.mouth=[200,130];FX_POS.outfit=[200,330];FX_POS.acc=[200,10];FX_POS.skin=[200,100];
+}
+function artChar(s){
+  const O=OUTFITS[s.outfit.s].art,bot=O&&O.img?ATY+AK*(O.at[1]+O.size[1]):0,f=bot>545?545/bot:1;
+  return `<g transform="translate(200,0) scale(${f}) translate(-200,0)">`+artChar0(s)+`</g>`;
+}
+function artChar0(s){
+  const H=HAIRS[s.hair.s].art,A=ACCS[s.acc.s].art,B=SKINS[s.skin].art,t=(B&&B.tint)||[1,1,1];
+  const tinted=Math.abs(t[0]-1)+Math.abs(t[1]-1)+Math.abs(t[2]-1)>.01;
+  const head=H&&H.head?aimg({img:H.head,at:H.hat,size:H.hsize},!H.noclip):'';
+  const skin=H&&H.skin&&tinted?`<g filter="url(#artTint)">${aimg({img:H.skin,at:H.hat,size:H.hsize},!H.noclip)}</g>`:'';
+  return `<defs><filter id="artTint" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="${t[0]} 0 0 0 0  0 ${t[1]} 0 0 0  0 0 ${t[2]} 0 0  0 0 0 1 0"/></filter></defs>`
+    +`<g transform="translate(${ATX},${ATY}) scale(${AK})">`+(H?aimg({...H,img:H.back||H.img}):'')+(OUTFITS[s.outfit.s].art&&OUTFITS[s.outfit.s].art.img&&B&&B.ns?aimg({...B,img:B.ns}):aimg(B))+aimg(OUTFITS[s.outfit.s].art)
+    +head+skin+`<g transform="translate(0,${(H&&H.mdy)||0})">`+aimg(MOUTHS[s.mouth.s].art)+`</g>`+aimg(A)+`</g>`;
+}
 /* ================= 狀態 ================= */
-const DEFAULT={skin:0,hair:{s:0,c:HAIR_COLORS[0]},eyes:{s:0,c:EYE_COLORS[0]},mouth:{s:0},
-  outfit:{s:0,c:OUTFIT_COLORS[0],sp:true},shoes:{s:0,c:SHOE_COLORS[0],sp:true},acc:{s:0,c:ACC_COLORS[0],sp:false},bg:0};
+const DEFAULT={skin:0,hair:{s:Math.max(0,HAIRS.findIndex(h=>h.n==='瀏海大波浪')),c:HAIR_COLORS[0]},eyes:{s:0,c:EYE_COLORS[0]},mouth:{s:0},
+  outfit:{s:0,c:OUTFIT_COLORS[0],sp:true},shoes:{s:0,c:'#ff8fb5',sp:false},acc:{s:0,c:ACC_COLORS[0],sp:false},bg:0};
 let st=JSON.parse(JSON.stringify(DEFAULT));
 let tab=0, visited=new Set([0]);
 const history=[];
@@ -1335,28 +1512,47 @@ const push=()=>{history.push(JSON.stringify(st));if(history.length>60)history.sh
 
 /* ================= 繪製 ================= */
 function buildChar(s){
-  const sk=SKINS[s.skin].c;
+  if(ART)return artChar(s);
+  const SKO=SKINS[s.skin],sk=SKO.c;
   const h={c:'url(#gHair)',dk:mix(s.hair.c,'#000',.35)};
   const H=HAIRS[s.hair.s],A=ACCS[s.acc.s];
   const a=mkctx(s.acc.c,s.acc.sp,'gAcc'),o=mkctx(s.outfit.c,s.outfit.sp,'gOut'),sh=mkctx(s.shoes.c,s.shoes.sp,'gShoe');
   const ir='url(#gIris)';
-  return H.back(h)+(A.back?A.back(a):'')+bodySVG(sk)+both(SHOES[s.shoes.s].d(sh,sk))+OUTFITS[s.outfit.s].d(o,sk)
-    +headSVG(sk)+EYES[s.eyes.s].d(ir)+`<g transform="translate(0,-4)">${MOUTHS[s.mouth.s].d()}</g>`
-    +H.front(h)+shine+(A.front?A.front(a):'');
+  const hl=lineOf(s.hair.c,'#2a1208'),sl=lineOf(sk,'#6a2a1a',.6),ol=lineOf(s.outfit.c,'#3a1030',.55),shl=lineOf(s.shoes.c,'#3a1a20',.6),al=lineOf(s.acc.c,'#3a1a20',.55);
+  const SH=SHOES[s.shoes.s],MO=MOUTHS[s.mouth.s];
+  return soften(H.back(h),hl)+soften(A.back?A.back(a):'',al)+(SKO.img?IMG(SKO.img):soften(bodySVG(sk),sl))+(SH.img?SH.d():soften(both(SH.d(sh,sk)),shl))+soften(OUTFITS[s.outfit.s].d(o,sk),ol)
+    +(SKO.img?'':soften(headSVG(sk),sl))+soften(EYES[s.eyes.s].d(ir),'#4a2420',.8)+(MO.img?MO.d():soften(`<g transform="translate(0,-4)">${MO.d()}</g>`,'#8a3a40',.7))
+    +soften(H.front(h),hl)+(H.img?'':shine)+soften(A.front?A.front(a):'',al);
 }
 function render(){
   $('#dynDefs').innerHTML=grads('gOut',st.outfit.c)+grads('gShoe',st.shoes.c)+grads('gAcc',st.acc.c)+irisGrad(st.eyes.c)+`<linearGradient id="gHalo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix(st.acc.c,'#fff',.6)}"/><stop offset=".5" stop-color="${st.acc.c}"/><stop offset="1" stop-color="${mix(st.acc.c,'#000',.25)}"/></linearGradient>`+`<radialGradient id="gAccR" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="${mix(st.acc.c,'#fff',.6)}"/><stop offset=".5" stop-color="${st.acc.c}"/><stop offset="1" stop-color="${mix(st.acc.c,'#000',.3)}"/></radialGradient>`+`<linearGradient id="gHair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix(st.hair.c,'#fff',.22)}"/><stop offset=".45" stop-color="${st.hair.c}"/><stop offset="1" stop-color="${mix(st.hair.c,'#000',.2)}"/></linearGradient>`+gS('gRbA',mix(st.outfit.c,'#ffd36e',.55))+gS('gRbB',mix(st.outfit.c,'#8fe0ff',.55));
+  if(ART)$('#dynDefs').innerHTML+=`<clipPath id="artFront" clipPathUnits="userSpaceOnUse"><rect x="-3000" y="-3000" width="8000" height="${3000+ACHIN+3}"/></clipPath>`;
   $('#charLayers').innerHTML=buildChar(st);
-  $('#scene').innerHTML=SCENES[st.bg].d();
+  $('#scene').innerHTML=soften(SCENES[st.bg].d(),'#b08070',.6);
   $('#stageWrap').style.background=SCENES[st.bg].bg;
 }
+function flatCtx(c,sp){return{c,sp:false,f:c,b:mix(c,'#000',.1),l:mix(c,'#fff',.55),dk:mix(c,'#000',.3),lt:mix(c,'#fff',.5),st:lum(c)>.72?mix(c,'#000',.4):'rgba(255,255,255,.85)',thumb:false};}
 function thumb(key,i){
+  {const it=TABS.find(t=>t.key===key).items[i];if(it&&it.art&&it.art.thumb)return `<img src="${asrc(it.art.thumb)}" alt="">`;}
   const T=TABS.find(t=>t.key===key);
-  const face=faceShape('#fff');
-  const hw={c:'#fff',dk:OL,thumb:true};
+  const sk=SKINS[st.skin].c,sl=lineOf(sk,'#6a2a1a',.6);
+  const face=soften(faceShape(sk),sl);
+  const hc=st.hair.c,hw={c:hc,dk:mix(hc,'#000',.35)};
+  const it=T.items[i],col=it.def||(st[key]&&st[key].c)||'#ff9ec7',fc=flatCtx(col);
   let inner='';
   switch(key){
-    case 'skin':{const c=SKINS[i].c;inner=faceShape(c)+E(136,262,18,10,'#ff8f9c',0,'opacity=".5"')+E(264,262,18,10,'#ff8f9c',0,'opacity=".5"')+E(150,232,10,13,OL,0)+E(250,232,10,13,OL,0)+C(147,227,3.5,'#fff',0)+C(247,227,3.5,'#fff',0)+L('M185 280 Q200 292 215 280',OL,5);break;}
+    case 'hair':inner=soften(HAIRS[i].back(hw),lineOf(hc,'#2a1208'))+face+soften(HAIRS[i].front(hw),lineOf(hc,'#2a1208'));break;
+    case 'eyes':inner=soften(EYES[i].d('url(#gIris)'),'#4a2420',.8);break;
+    case 'mouth':inner=soften(MOUTHS[i].d(),'#8a3a40',.7);break;
+    case 'outfit':inner=soften(OUTFITS[i].d(fc,sk),lineOf(col,'#3a1030',.55));break;
+    case 'shoes':inner=SHOES[i].img?SHOES[i].d():soften(both(SHOES[i].d(fc,sk)),lineOf(col,'#3a1a20',.6));break;
+    case 'skin':if(SKINS[i].img)inner=IMG(SKINS[i].img);break;
+    case 'acc':{const A=ACCS[i],fa=flatCtx(it.def||st.acc.c),la=lineOf(it.def||st.acc.c,'#3a1a20',.55);inner=soften(A.back?A.back(fa):'',la)+face+soften(A.front?A.front(fa):'',la)+(i===0?L('M170 185 L230 245 M230 185 L170 245','#f0b8d2',10):'');break;}
+    case 'bg':inner=soften(SCENES[i].d(),'#b08070',.6);break;
+  }
+  if(inner)return `<svg viewBox="${T.vb}" preserveAspectRatio="xMidYMid meet">${inner}</svg>`;
+  switch(key){
+    case 'skin':{const c=SKINS[i].c;inner=soften(faceShape(c),lineOf(c,'#6a2a1a',.6))+E(136,262,18,10,'#ff8f9c',0,'opacity=".5"')+E(264,262,18,10,'#ff8f9c',0,'opacity=".5"')+E(150,232,10,13,OL,0)+E(250,232,10,13,OL,0)+C(147,227,3.5,'#fff',0)+C(247,227,3.5,'#fff',0)+L('M185 280 Q200 292 215 280',OL,5);break;}
     case 'hair':inner=HAIRS[i].back(hw)+face+HAIRS[i].front(hw);break;
     case 'eyes':inner=EYES[i].d('url(#gIris)');break;
     case 'mouth':inner=MOUTHS[i].d();break;
@@ -1376,7 +1572,7 @@ function renderTabs(){
 function renderPanel(){
   const T=TABS[tab];
   const pal=$('#palette');
-  if(T.colors){
+  if(T.colors&&!IMGCATS.has(T.key)){
     pal.classList.remove('hide');
     let h='';
     if(T.sparkle)h+=`<button class="sw spark ${st[T.key].sp?'on':''}" data-spark="1" aria-label="亮片效果"><svg viewBox="0 0 24 24"><path d="${star(12,12,10,3.2,4)}" fill="#fff"/></svg></button><div class="divider"></div>`;
@@ -1492,7 +1688,7 @@ $('#photo').addEventListener('click',e=>{if(e.target.id==='photo')$('#photo').cl
   document.addEventListener('touchmove',e=>{if(e.touches&&e.touches.length>1)e.preventDefault();},{passive:false});
 })();
 /* ================= 啟動 ================= */
-buildStaticDefs();render();renderTabs();renderPanel();
+buildStaticDefs();render();renderTabs();renderPanel();preloadAssets();
 </script>
 </body>
 </html>
