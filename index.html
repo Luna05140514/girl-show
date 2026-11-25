@@ -1632,10 +1632,11 @@ function renderStk(){
 }
 function drawStkUI(){
   const o=st.stk&&st.stk[stkSel];if(!o){$('#stkUI').innerHTML='';return;}
-  const it=STK[o.k],w=o.w,h=w*it.ar,pad=6,x0=o.x-w/2-pad,y0=o.y-h/2-pad,x1=o.x+w/2+pad,y1=o.y+h/2+pad;
-  $('#stkUI').innerHTML=`<rect x="${x0}" y="${y0}" width="${x1-x0}" height="${y1-y0}" rx="8" fill="none" stroke="#e86fb0" stroke-width="2" stroke-dasharray="6 4"/>`
+  const it=STK[o.k],w=o.w,h=w*it.ar,pad=6,x0=-w/2-pad,y0=-h/2-pad,x1=w/2+pad,y1=h/2+pad;
+  $('#stkUI').innerHTML=`<g transform="translate(${o.x},${o.y}) rotate(${o.r||0})"><rect x="${x0}" y="${y0}" width="${x1-x0}" height="${y1-y0}" rx="8" fill="none" stroke="#e86fb0" stroke-width="2" stroke-dasharray="6 4"/>`
     +`<g class="stkBtn" data-act="del" transform="translate(${x1},${y0})"><circle r="11" fill="#ff6f91" stroke="#fff" stroke-width="2.5"/><path d="M-4 -4 L4 4 M4 -4 L-4 4" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></g>`
-    +`<g class="stkBtn" data-act="size" transform="translate(${x1},${y1})"><circle r="11" fill="#6fa9ec" stroke="#fff" stroke-width="2.5"/><path d="M-4 4 L4 -4 M0 -4 L4 -4 L4 0 M-4 0 L-4 4 L0 4" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></g>`;
+    +`<g class="stkBtn" data-act="size" transform="translate(${x1},${y1})"><circle r="11" fill="#6fa9ec" stroke="#fff" stroke-width="2.5"/><path d="M-4 4 L4 -4 M0 -4 L4 -4 L4 0 M-4 0 L-4 4 L0 4" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></g>`
+    +`<path d="M0 ${y0} L0 ${y0-16}" stroke="#e86fb0" stroke-width="2" stroke-dasharray="3 3"/><g class="stkBtn" data-act="rot" transform="translate(0,${y0-26})"><circle r="11" fill="#7dc98a" stroke="#fff" stroke-width="2.5"/><path d="M-5 2 A5.5 5.5 0 1 1 1 5.5" fill="none" stroke="#fff" stroke-width="2.3" stroke-linecap="round"/><path d="M-7.5 -1 L-5 3 L-1.5 0" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g></g>`;
 }
 function addSticker(k){
   push();if(!st.stk)st.stk=[];
@@ -1648,7 +1649,9 @@ $('#stage').addEventListener('pointerdown',e=>{
   const btn=e.target.closest('.stkBtn'),g=e.target.closest('.stk');
   if(btn&&stkSel>=0){e.preventDefault();
     if(btn.dataset.act==='del'){push();st.stk.splice(stkSel,1);stkSel=-1;renderStk();tone(700,300,.1);return;}
-    const o=st.stk[stkSel],p=svgPt(e);stkDrag={mode:'size',i:stkSel,ox:o.x,oy:o.y,w0:o.w,d0:Math.hypot(p.x-o.x,p.y-o.y),pushed:false};$('#stage').setPointerCapture(e.pointerId);return;}
+    const o=st.stk[stkSel],p=svgPt(e);
+    if(btn.dataset.act==='rot'){stkDrag={mode:'rot',i:stkSel,a0:Math.atan2(p.y-o.y,p.x-o.x)*180/Math.PI,r0:o.r||0,pushed:false};$('#stage').setPointerCapture(e.pointerId);return;}
+    stkDrag={mode:'size',i:stkSel,ox:o.x,oy:o.y,w0:o.w,d0:Math.hypot(p.x-o.x,p.y-o.y),pushed:false};$('#stage').setPointerCapture(e.pointerId);return;}
   if(g){e.preventDefault();const i=+g.dataset.i,o=st.stk[i],p=svgPt(e);stkSel=i;
     stkDrag={mode:'move',i,dx:p.x-o.x,dy:p.y-o.y,pushed:false};drawStkUI();$('#stage').setPointerCapture(e.pointerId);return;}
   if(stkSel>=0){stkSel=-1;drawStkUI();}
@@ -1657,6 +1660,7 @@ $('#stage').addEventListener('pointermove',e=>{
   if(!stkDrag)return;e.preventDefault();const o=st.stk[stkDrag.i];if(!o)return;const p=svgPt(e);
   if(!stkDrag.pushed){push();stkDrag.pushed=true;}
   if(stkDrag.mode==='move'){o.x=Math.round(p.x-stkDrag.dx);o.y=Math.round(p.y-stkDrag.dy);}
+  else if(stkDrag.mode==='rot'){let r=stkDrag.r0+Math.atan2(p.y-o.y,p.x-o.x)*180/Math.PI-stkDrag.a0;r=((r+540)%360)-180;if(Math.abs(r)<4)r=0;o.r=Math.round(r);}
   else{const d=Math.hypot(p.x-o.x,p.y-o.y);o.w=Math.max(18,Math.min(180,Math.round(stkDrag.w0*d/Math.max(8,stkDrag.d0))));}
   renderStk();
 });
