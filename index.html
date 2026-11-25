@@ -70,6 +70,9 @@
   #boing{transform-box:fill-box;transform-origin:50% 100%}
   #boing.go{animation:boing .5s cubic-bezier(.3,1.6,.5,1)}
   @keyframes boing{0%{transform:scale(1.05,.93)}100%{transform:scale(1,1)}}
+  #stage .stk{cursor:grab;touch-action:none}
+  #stage .stkBtn{cursor:pointer;touch-action:none}
+  #stage{touch-action:none}
   #stage .blink{transform-box:fill-box;transform-origin:center;animation:blink 5s infinite}
   @keyframes blink{0%,93%,100%{transform:scaleY(1)}96%{transform:scaleY(.08)}}
   #stage .glit{animation:shimmer 1.6s ease-in-out infinite alternate}
@@ -236,7 +239,7 @@
       <g id="scene"></g>
       <ellipse cx="350" cy="655" rx="100" ry="15" fill="#000" opacity=".1"/>
       <g transform="translate(150,122)">
-        <g id="bob"><g id="boing"><g id="charLayers"></g></g></g>
+        <g id="bob"><g id="boing"><g id="charLayers"></g><g id="stkLayer"></g><g id="stkUI"></g></g></g>
         <g id="fx"></g>
       </g>
     </svg>
@@ -282,7 +285,10 @@
   </div>
 </div>
 
-<script src="assets/art.js"></script>
+<script src="art.js"></script>
+<script src="img1.js"></script>
+<script src="img2.js"></script>
+<script src="img3.js"></script>
 <script>
 /* ================= 基本工具 ================= */
 const OL = '#3b2317';
@@ -1441,6 +1447,7 @@ const FX_POS={skin:[200,215],hair:[200,120],eyes:[200,232],mouth:[200,292],outfi
    在 assets/manifest.js 裡登記 PNG 圖片，就會自動加進對應分頁。
    角色圖片：800×1120 透明 PNG（對應遊戲座標 400×560）；場景圖片：1400×1440。 */
 const ASSET=window.DOLL_ASSETS||null,IMGCACHE={};
+if(window.DOLL_IMG)for(const k in window.DOLL_IMG)IMGCACHE['art:'+k]=window.DOLL_IMG[k];
 const ipath=p=>((ASSET&&ASSET.base)||'assets/')+p;
 const isrc=p=>IMGCACHE[p]||ipath(p);
 const IMG=p=>p?`<image href="${isrc(p)}" x="0" y="0" width="400" height="560" preserveAspectRatio="xMidYMid meet"/>`:'';
@@ -1462,7 +1469,7 @@ function applyAssets(){
 }
 applyAssets();
 async function preloadAssets(){               // 轉成內嵌資料，拍照存圖時才會包含圖片
-  if(!/^https?:$/.test(location.protocol))return;
+  if(window.DOLL_IMG||!/^https?:$/.test(location.protocol))return;
   if(ART){const ps=new Set();const w=v=>{if(typeof v==='string'&&/\.(png|jpe?g|webp)$/i.test(v))ps.add(v);else if(v&&typeof v==='object')Object.values(v).forEach(w);};w(ART);
     await Promise.all([...ps].map(async p=>{try{const r=await fetch(asrc(p));if(!r.ok)return;const b=await r.blob();IMGCACHE['art:'+p]=await new Promise(res=>{const fr=new FileReader();fr.onload=()=>res(fr.result);fr.readAsDataURL(b);});}catch(e){}}));
     render();}
@@ -1485,9 +1492,13 @@ if(ART){
   const fill=(arr,list,extra)=>{arr.length=0;if(extra)arr.push(extra);list.forEach(it=>arr.push({n:it.name,art:it,c:'#ffe1d6',d:()=>'',back:()=>'',front:()=>''}));};
   fill(SKINS,ART.body);fill(HAIRS,ART.hair);fill(MOUTHS,ART.mouth);fill(OUTFITS,ART.outfit);
   fill(ACCS,ART.acc,{n:'不戴'});
-  EYES.length=0;EYES.push({n:'預設',d:()=>''});SHOES.length=0;SHOES.push({n:'預設',d:()=>''});
-  for(let i=TABS.length-1;i>=0;i--){if(TABS[i].key==='eyes'||TABS[i].key==='shoes')TABS.splice(i,1);else if(TABS[i].key!=='bg')TABS[i].colors=null;}
-  FX_POS.hair=[200,20];FX_POS.mouth=[200,130];FX_POS.outfit=[200,330];FX_POS.acc=[200,10];FX_POS.skin=[200,100];
+  (ART.stickers||[]).forEach((it,k)=>ACCS.push({n:it.name,stk:k,art:{thumb:it.img},d:()=>'',back:()=>'',front:()=>''}));
+  EYES.length=0;EYES.push({n:'預設',d:()=>''});SHOES.length=0;
+  if(ART.shoes)ART.shoes.forEach(it=>SHOES.push({n:it.name,art:it,d:()=>''}));else SHOES.push({n:'預設',d:()=>''});
+  if(ART.scenes){SCENES.length=0;ART.scenes.forEach(it=>{const H=780,W=H*it.ar;SCENES.push({n:it.name,bg:'#f3e6f2',art:{thumb:it.thumb},
+    d:()=>`<rect x="-1000" y="-600" width="2700" height="2000" fill="#f3e6f2"/><image href="${asrc(it.img)}" x="${350-W/2}" y="-50" width="${W}" height="${H}" preserveAspectRatio="none"/>`});});}
+  for(let i=TABS.length-1;i>=0;i--){if(TABS[i].key==='eyes'||(TABS[i].key==='shoes'&&!ART.shoes))TABS.splice(i,1);else if(TABS[i].key!=='bg')TABS[i].colors=null;}
+  FX_POS.hair=[200,20];FX_POS.mouth=[200,130];FX_POS.outfit=[200,330];FX_POS.acc=[200,10];FX_POS.skin=[200,100];FX_POS.shoes=[200,500];
 }
 function artChar(s){
   const O=OUTFITS[s.outfit.s].art,bot=O&&O.img?ATY+AK*(O.at[1]+O.size[1]):0,f=bot>545?545/bot:1;
@@ -1499,11 +1510,11 @@ function artChar0(s){
   const head=H&&H.head?aimg({img:H.head,at:H.hat,size:H.hsize},!H.noclip):'';
   const skin=H&&H.skin&&tinted?`<g filter="url(#artTint)">${aimg({img:H.skin,at:H.hat,size:H.hsize},!H.noclip)}</g>`:'';
   return `<defs><filter id="artTint" color-interpolation-filters="sRGB"><feColorMatrix type="matrix" values="${t[0]} 0 0 0 0  0 ${t[1]} 0 0 0  0 0 ${t[2]} 0 0  0 0 0 1 0"/></filter></defs>`
-    +`<g transform="translate(${ATX},${ATY}) scale(${AK})">`+(H?aimg({...H,img:H.back||H.img}):'')+(OUTFITS[s.outfit.s].art&&OUTFITS[s.outfit.s].art.img&&B&&B.ns?aimg({...B,img:B.ns}):aimg(B))+aimg(OUTFITS[s.outfit.s].art)
+    +`<g transform="translate(${ATX},${ATY}) scale(${AK})">`+(H?aimg({...H,img:H.back||H.img}):'')+(OUTFITS[s.outfit.s].art&&OUTFITS[s.outfit.s].art.img&&B&&B.ns?aimg({...B,img:B.ns}):aimg(B))+aimg(SHOES[s.shoes.s]&&SHOES[s.shoes.s].art)+(tinted&&SHOES[s.shoes.s]&&SHOES[s.shoes.s].art&&SHOES[s.shoes.s].art.skin?`<g filter="url(#artTint)">${aimg({...SHOES[s.shoes.s].art,img:SHOES[s.shoes.s].art.skin})}</g>`:'')+aimg(OUTFITS[s.outfit.s].art)
     +head+skin+`<g transform="translate(0,${(H&&H.mdy)||0})">`+aimg(MOUTHS[s.mouth.s].art)+`</g>`+aimg(A)+`</g>`;
 }
 /* ================= 狀態 ================= */
-const DEFAULT={skin:0,hair:{s:Math.max(0,HAIRS.findIndex(h=>h.n==='瀏海大波浪')),c:HAIR_COLORS[0]},eyes:{s:0,c:EYE_COLORS[0]},mouth:{s:0},
+const DEFAULT={stk:[],skin:0,hair:{s:Math.max(0,HAIRS.findIndex(h=>h.n==='瀏海大波浪')),c:HAIR_COLORS[0]},eyes:{s:0,c:EYE_COLORS[0]},mouth:{s:0},
   outfit:{s:0,c:OUTFIT_COLORS[0],sp:true},shoes:{s:0,c:'#ff8fb5',sp:false},acc:{s:0,c:ACC_COLORS[0],sp:false},bg:0};
 let st=JSON.parse(JSON.stringify(DEFAULT));
 let tab=0, visited=new Set([0]);
@@ -1528,6 +1539,7 @@ function render(){
   $('#dynDefs').innerHTML=grads('gOut',st.outfit.c)+grads('gShoe',st.shoes.c)+grads('gAcc',st.acc.c)+irisGrad(st.eyes.c)+`<linearGradient id="gHalo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix(st.acc.c,'#fff',.6)}"/><stop offset=".5" stop-color="${st.acc.c}"/><stop offset="1" stop-color="${mix(st.acc.c,'#000',.25)}"/></linearGradient>`+`<radialGradient id="gAccR" cx=".35" cy=".3" r=".8"><stop offset="0" stop-color="${mix(st.acc.c,'#fff',.6)}"/><stop offset=".5" stop-color="${st.acc.c}"/><stop offset="1" stop-color="${mix(st.acc.c,'#000',.3)}"/></radialGradient>`+`<linearGradient id="gHair" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${mix(st.hair.c,'#fff',.22)}"/><stop offset=".45" stop-color="${st.hair.c}"/><stop offset="1" stop-color="${mix(st.hair.c,'#000',.2)}"/></linearGradient>`+gS('gRbA',mix(st.outfit.c,'#ffd36e',.55))+gS('gRbB',mix(st.outfit.c,'#8fe0ff',.55));
   if(ART)$('#dynDefs').innerHTML+=`<clipPath id="artFront" clipPathUnits="userSpaceOnUse"><rect x="-3000" y="-3000" width="8000" height="${3000+ACHIN+3}"/></clipPath>`;
   $('#charLayers').innerHTML=buildChar(st);
+  renderStk();
   $('#scene').innerHTML=soften(SCENES[st.bg].d(),'#b08070',.6);
   $('#stageWrap').style.background=SCENES[st.bg].bg;
 }
@@ -1609,10 +1621,52 @@ function burst(key,n=9,spread=90){
 }
 function changed(key){render();refreshSelection();pop();if(key!=='bg'){boing();burst(key);}}
 
+
+/* ================= 可拖曳飾品（貼在頭髮或衣服上）================= */
+const STK=(ART&&ART.stickers)||[];let stkSel=-1,stkDrag=null;
+function renderStk(){
+  if(!st.stk)st.stk=[];
+  $('#stkLayer').innerHTML=st.stk.map((o,i)=>{const it=STK[o.k];if(!it)return'';const w=o.w,h=w*it.ar;
+    return `<g class="stk" data-i="${i}" transform="translate(${o.x},${o.y}) rotate(${o.r||0})"><image href="${asrc(it.img)}" x="${-w/2}" y="${-h/2}" width="${w}" height="${h}"/></g>`;}).join('');
+  drawStkUI();
+}
+function drawStkUI(){
+  const o=st.stk&&st.stk[stkSel];if(!o){$('#stkUI').innerHTML='';return;}
+  const it=STK[o.k],w=o.w,h=w*it.ar,pad=6,x0=o.x-w/2-pad,y0=o.y-h/2-pad,x1=o.x+w/2+pad,y1=o.y+h/2+pad;
+  $('#stkUI').innerHTML=`<rect x="${x0}" y="${y0}" width="${x1-x0}" height="${y1-y0}" rx="8" fill="none" stroke="#e86fb0" stroke-width="2" stroke-dasharray="6 4"/>`
+    +`<g class="stkBtn" data-act="del" transform="translate(${x1},${y0})"><circle r="11" fill="#ff6f91" stroke="#fff" stroke-width="2.5"/><path d="M-4 -4 L4 4 M4 -4 L-4 4" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></g>`
+    +`<g class="stkBtn" data-act="size" transform="translate(${x1},${y1})"><circle r="11" fill="#6fa9ec" stroke="#fff" stroke-width="2.5"/><path d="M-4 4 L4 -4 M0 -4 L4 -4 L4 0 M-4 0 L-4 4 L0 4" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></g>`;
+}
+function addSticker(k){
+  push();if(!st.stk)st.stk=[];
+  const n=st.stk.length;st.stk.push({k,x:232+((n*17)%60)-20,y:-2+((n*23)%50),w:48,r:0});
+  stkSel=st.stk.length-1;renderStk();pop();
+  toast('拖曳飾品到想放的位置');
+}
+function svgPt(e){const g=$('#stkLayer'),m=g.getScreenCTM().inverse(),p=$('#stage').createSVGPoint();p.x=e.clientX;p.y=e.clientY;return p.matrixTransform(m);}
+$('#stage').addEventListener('pointerdown',e=>{
+  const btn=e.target.closest('.stkBtn'),g=e.target.closest('.stk');
+  if(btn&&stkSel>=0){e.preventDefault();
+    if(btn.dataset.act==='del'){push();st.stk.splice(stkSel,1);stkSel=-1;renderStk();tone(700,300,.1);return;}
+    const o=st.stk[stkSel],p=svgPt(e);stkDrag={mode:'size',i:stkSel,ox:o.x,oy:o.y,w0:o.w,d0:Math.hypot(p.x-o.x,p.y-o.y),pushed:false};$('#stage').setPointerCapture(e.pointerId);return;}
+  if(g){e.preventDefault();const i=+g.dataset.i,o=st.stk[i],p=svgPt(e);stkSel=i;
+    stkDrag={mode:'move',i,dx:p.x-o.x,dy:p.y-o.y,pushed:false};drawStkUI();$('#stage').setPointerCapture(e.pointerId);return;}
+  if(stkSel>=0){stkSel=-1;drawStkUI();}
+});
+$('#stage').addEventListener('pointermove',e=>{
+  if(!stkDrag)return;e.preventDefault();const o=st.stk[stkDrag.i];if(!o)return;const p=svgPt(e);
+  if(!stkDrag.pushed){push();stkDrag.pushed=true;}
+  if(stkDrag.mode==='move'){o.x=Math.round(p.x-stkDrag.dx);o.y=Math.round(p.y-stkDrag.dy);}
+  else{const d=Math.hypot(p.x-o.x,p.y-o.y);o.w=Math.max(18,Math.min(180,Math.round(stkDrag.w0*d/Math.max(8,stkDrag.d0))));}
+  renderStk();
+});
+const stkEnd=()=>{if(stkDrag&&stkDrag.pushed)pop();stkDrag=null;};
+$('#stage').addEventListener('pointerup',stkEnd);$('#stage').addEventListener('pointercancel',stkEnd);
 /* ================= 互動 ================= */
 $('#tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;tab=+b.dataset.t;visited.add(tab);renderTabs();renderPanel();tone(700,900,.08,'triangle',.05);});
 $('#grid').addEventListener('click',e=>{
   const b=e.target.closest('.card');if(!b)return;const T=TABS[tab],i=+b.dataset.i;
+  if(T.key==='acc'&&T.items[i].stk!==undefined){addSticker(T.items[i].stk);return;}
   if(selIndex(T.key)===i){boing();pop();return;}
   push();
   if(T.key==='skin')st.skin=i;else if(T.key==='bg')st.bg=i;else st[T.key].s=i;
@@ -1629,13 +1683,13 @@ $('#bNext').onclick=()=>{
   if(tab===TABS.length-1){celebrate();tab=0;}else tab++;
   visited.add(tab);renderTabs();renderPanel();
 };
-$('#bUndo').onclick=()=>{if(!history.length){boing();return;}st=JSON.parse(history.pop());render();renderPanel();tone(800,500,.12);boing();};
-$('#bHome').onclick=()=>{push();st=JSON.parse(JSON.stringify(DEFAULT));tab=0;visited=new Set([0]);render();renderTabs();renderPanel();tone(500,300,.15);boing();};
+$('#bUndo').onclick=()=>{if(!history.length){boing();return;}stkSel=-1;st=JSON.parse(history.pop());render();renderPanel();tone(800,500,.12);boing();};
+$('#bHome').onclick=()=>{push();stkSel=-1;st=JSON.parse(JSON.stringify(DEFAULT));tab=0;visited=new Set([0]);render();renderTabs();renderPanel();tone(500,300,.15);boing();};
 $('#bDice').onclick=()=>{
   push();const R=a=>a[Math.floor(Math.random()*a.length)],ri=n=>Math.floor(Math.random()*n);
   st={skin:ri(SKINS.length),hair:{s:ri(HAIRS.length),c:R(HAIR_COLORS)},eyes:{s:ri(EYES.length),c:R(EYE_COLORS)},mouth:{s:ri(MOUTHS.length)},
     outfit:{s:ri(OUTFITS.length),c:R(OUTFIT_COLORS),sp:Math.random()<.6},shoes:{s:ri(SHOES.length),c:R(SHOE_COLORS),sp:Math.random()<.4},
-    acc:{s:ri(ACCS.length),c:R(ACC_COLORS),sp:Math.random()<.5},bg:ri(SCENES.length)};
+    acc:{s:ri(ACCS.filter(a=>a.stk===undefined).length),c:R(ACC_COLORS),sp:Math.random()<.5},bg:ri(SCENES.length),stk:(st.stk||[])};
   render();renderPanel();boing();celebrate(true);[0,90,180].forEach((d,k)=>setTimeout(()=>tone(500+k*200,900+k*200,.1),d));
 };
 $('#bSound').onclick=()=>{muted=!muted;$('#waves').style.display=muted?'none':'';$('#muteX').style.display=muted?'':'none';};
@@ -1650,7 +1704,7 @@ $('#bCam').onclick=()=>{
   const f=$('#flash');f.classList.remove('go');void f.offsetWidth;f.classList.add('go');
   tone(1800,300,.08,'square',.05);setTimeout(()=>tone(1200,200,.1,'square',.04),90);
   const svg=$('#stage').cloneNode(true);
-  svg.querySelector('#fx').innerHTML='';
+  svg.querySelector('#fx').innerHTML='';svg.querySelector('#stkUI').innerHTML='';
   svg.setAttribute('xmlns','http://www.w3.org/2000/svg');svg.setAttribute('width','1400');svg.setAttribute('height','1440');
   const url='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(svg));
   const img=new Image();
