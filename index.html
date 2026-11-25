@@ -1491,7 +1491,7 @@ const aimg=(it,clip)=>(it&&it.img)?`<image href="${asrc(it.img)}" x="${it.at?it.
 if(ART){
   const fill=(arr,list,extra)=>{arr.length=0;if(extra)arr.push(extra);list.forEach(it=>arr.push({n:it.name,art:it,c:'#ffe1d6',d:()=>'',back:()=>'',front:()=>''}));};
   fill(SKINS,ART.body);fill(HAIRS,ART.hair);fill(MOUTHS,ART.mouth);fill(OUTFITS,ART.outfit);
-  fill(ACCS,ART.acc,{n:'不戴'});
+  fill(ACCS,ART.acc,{n:'全部移除'});
   (ART.stickers||[]).forEach((it,k)=>ACCS.push({n:it.name,stk:k,art:{thumb:it.img},d:()=>'',back:()=>'',front:()=>''}));
   EYES.length=0;EYES.push({n:'預設',d:()=>''});SHOES.length=0;
   if(ART.shoes)ART.shoes.forEach(it=>SHOES.push({n:it.name,art:it,d:()=>''}));else SHOES.push({n:'預設',d:()=>''});
@@ -1667,6 +1667,7 @@ $('#tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)r
 $('#grid').addEventListener('click',e=>{
   const b=e.target.closest('.card');if(!b)return;const T=TABS[tab],i=+b.dataset.i;
   if(T.key==='acc'&&T.items[i].stk!==undefined){addSticker(T.items[i].stk);return;}
+  if(T.key==='acc'&&i===0){if(st.stk&&st.stk.length){push();st.stk=[];stkSel=-1;renderStk();tone(700,300,.1);}return;}
   if(selIndex(T.key)===i){boing();pop();return;}
   push();
   if(T.key==='skin')st.skin=i;else if(T.key==='bg')st.bg=i;else st[T.key].s=i;
