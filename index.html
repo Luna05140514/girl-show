@@ -228,6 +228,14 @@
     .card span{font-size:9px;padding:0 6px;border-width:1.5px}
     #bCam::after{top:-22%;right:-18%}
   }
+
+  /* 左上小按鈕縮小 */
+  #bHome,#bUndo,#bDice,#bSound{--bs:44px;width:44px;height:44px;top:18px;border-width:2px}
+  #bHome{left:18px}#bUndo{left:76px}#bDice{left:134px}#bSound{left:192px}
+  @media (max-aspect-ratio: 1/1){
+    #bHome,#bUndo,#bDice,#bSound{--bs:20px;width:20px;height:20px;top:8px;border-width:1.5px}
+    #bHome{left:8px}#bUndo{left:34px}#bDice{left:60px}#bSound{left:86px}
+  }
 </style>
 </head>
 <body>
